@@ -1,0 +1,744 @@
+/* ==========================================================================
+   NOVA — Network Of Warehouse Access
+   Design System & Cosmic Orbit Stylesheet
+   ========================================================================== */
+
+:root {
+    /* Cosmic & Warehouse Enterprise Palette */
+    --nova-void: #030611;
+    --nova-space: #050816;
+    --nova-nebula: #0b1026;
+    --nova-midnight: #111936;
+    --nova-slate: #18234c;
+    --nova-surface: rgba(17, 25, 54, 0.7);
+    --nova-surface-hover: rgba(24, 35, 76, 0.85);
+    --nova-surface-solid: #0d1430;
+
+    /* Radiant Cosmic Energies */
+    --nova-core-gold: #ffaa00;
+    --nova-core-amber: #ff5500;
+    --nova-core-glow: rgba(255, 170, 0, 0.4);
+
+    --nova-cyan: #00f5d4;
+    --nova-cyan-glow: rgba(0, 245, 212, 0.35);
+
+    --nova-blue: #00d4ff;
+    --nova-blue-glow: rgba(0, 212, 255, 0.35);
+
+    --nova-violet: #8a2be2;
+    --nova-violet-glow: rgba(138, 43, 226, 0.4);
+
+    --nova-emerald: #10b981;
+    --nova-emerald-glow: rgba(16, 185, 129, 0.35);
+
+    --nova-rose: #ff2a85;
+    --nova-rose-glow: rgba(255, 42, 133, 0.4);
+
+    --nova-text-primary: #f8fafc;
+    --nova-text-secondary: #94a3b8;
+    --nova-text-muted: #64748b;
+    --nova-border-subtle: rgba(255, 255, 255, 0.08);
+    --nova-border-bright: rgba(0, 212, 255, 0.3);
+
+    /* Fonts */
+    --font-heading: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-tech: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Grid and Orbit dimensions */
+    --orbit-center-size: 140px;
+}
+
+/* Base resets & typography */
+html {
+    scroll-behavior: smooth;
+    background-color: var(--nova-void);
+    color: var(--nova-text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--nova-space);
+    background-image:
+        radial-gradient(circle at 50% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 10% 60%, rgba(0, 245, 212, 0.04) 0%, transparent 40%);
+    min-height: 100vh;
+    color: var(--nova-text-primary);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--nova-void);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.25);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.6);
+}
+
+/* Typography Helpers */
+.font-orbitron {
+    font-family: var(--font-heading);
+    letter-spacing: 0.05em;
+}
+
+.font-tech {
+    font-family: var(--font-tech);
+}
+
+.font-mono {
+    font-family: var(--font-mono);
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+    background: rgba(11, 16, 38, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-glow {
+    background: rgba(17, 25, 54, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.08), inset 0 0 20px rgba(0, 212, 255, 0.04);
+}
+
+.glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(11, 16, 38, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+    border-color: rgba(0, 212, 255, 0.45);
+    box-shadow: 0 12px 40px -10px rgba(0, 212, 255, 0.3), inset 0 0 15px rgba(0, 212, 255, 0.12);
+    transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   NOVA CORE (Central Star) Visuals
+   ========================================================================== */
+.nova-sun-container {
+    position: absolute;
+    width: var(--orbit-center-size);
+    height: var(--orbit-center-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 45;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+
+.nova-sun-container:hover {
+    transform: scale(1.08);
+}.nova-core-orb {
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff7d6 0%, #ffc83b 30%, #ff6b00 70%, #991b00 100%);
+    box-shadow:
+        0 0 45px #ff9900,
+        0 0 90px rgba(255, 120, 0, 0.85),
+        0 0 140px rgba(255, 80, 0, 0.55),
+        inset 0 0 30px rgba(255, 255, 255, 0.85);
+    position: relative;
+    animation: corePulse 3.5s ease-in-out infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nova-core-inner-glow {
+    position: absolute;
+    inset: -22px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 170, 0, 0.5) 0%, rgba(255, 85, 0, 0.2) 50%, transparent 75%);
+    animation: coronaSpin 20s linear infinite;
+    pointer-events: none;
+}
+
+.nova-core-shield {
+    position: absolute;
+    inset: -40px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 215, 0, 0.45);
+    animation: shieldSpin 30s linear infinite reverse;
+    pointer-events: none;
+}
+
+.nova-core-shield-2 {
+    position: absolute;
+    inset: -62px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-left-color: transparent;
+    border-right-color: transparent;
+    animation: shieldSpin 18s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes corePulse {
+    0% {
+        box-shadow:
+            0 0 30px #ff9900,
+            0 0 60px rgba(255, 120, 0, 0.7),
+            0 0 100px rgba(255, 80, 0, 0.4),
+            inset 0 0 20px rgba(255, 255, 255, 0.7);
+        filter: brightness(1);
+    }
+
+    100% {
+        box-shadow:
+            0 0 45px #ffaa00,
+            0 0 90px rgba(255, 140, 0, 0.9),
+            0 0 150px rgba(255, 90, 0, 0.65),
+            inset 0 0 30px rgba(255, 255, 255, 1);
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes coronaSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.08);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes shieldSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   SOLAR SYSTEM VIEWPORT & ORBITS
+   ========================================================================== */
+.universe-stage {
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+}
+
+@media (max-width: 1024px) {
+    .universe-stage {
+        min-height: 780px;
+    }
+}
+
+@media (max-width: 640px) {
+    .universe-stage {
+        min-height: 620px;
+    }
+}
+
+.solar-system-plane {
+    position: relative;
+    width: 900px;
+    height: 900px;
+    transform-style: preserve-3d;
+    transform: rotateX(24deg) rotateZ(0deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Orbital Rings */
+.orbit-track {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    transform-style: preserve-3d;
+    box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.02);
+}
+
+.orbit-track.highlight {
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.18), inset 0 0 15px rgba(0, 212, 255, 0.1);
+}
+
+.orbit-track-1 {
+    width: 440px;
+    height: 440px;
+}
+
+.orbit-track-2 {
+    width: 760px;
+    height: 760px;
+}
+
+/* Rotating Orbit Carriers */
+.orbit-carrier {
+    position: absolute;
+    inset: auto;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: orbitRotate linear infinite;
+    transform-style: preserve-3d;
+}
+
+#carrier-1 {
+    width: 440px;
+    height: 440px;
+}
+
+#carrier-2 {
+    width: 760px;
+    height: 760px;
+}
+
+.orbit-carrier.paused {
+    animation-play-state: paused !important;
+}
+
+/* Planet Node Object */
+.planet-node {
+    position: absolute;
+    pointer-events: auto;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    z-index: 30;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planet-node:hover {
+    z-index: 70 !important;
+}
+
+/* Counter-rotate the planet content so it stays upright */
+.planet-counter-rotator {
+    animation: counterOrbitRotate linear infinite;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.orbit-carrier.paused .planet-counter-rotator {
+    animation-play-state: paused !important;
+}
+
+.planet-body {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.75);
+}
+
+.planet-node:hover .planet-body {
+    transform: scale(1.18);
+}
+
+/* Specific Planet Themes */
+.planet-mars {
+    background: radial-gradient(circle at 32% 32%, #ffa066 0%, #ff5722 35%, #d01d1d 65%, #590d15 100%);
+    box-shadow: 0 0 45px rgba(255, 87, 34, 0.85), inset 0 0 22px rgba(255, 220, 180, 0.75);
+}
+
+.planet-node:hover .planet-mars {
+    box-shadow: 0 0 65px rgba(255, 87, 34, 1), 0 0 110px rgba(255, 40, 20, 0.65);
+}
+
+.planet-saturnus {
+    background: radial-gradient(circle at 32% 32%, #fff085 0%, #f59e0b 35%, #b45309 70%, #451a03 100%);
+    box-shadow: 0 0 45px rgba(245, 158, 11, 0.85), inset 0 0 22px rgba(255, 250, 200, 0.75);
+}
+
+.planet-node:hover .planet-saturnus {
+    box-shadow: 0 0 65px rgba(245, 158, 11, 1), 0 0 110px rgba(217, 119, 6, 0.65);
+}
+
+.planet-saturnus::after {
+    content: '';
+    position: absolute;
+    width: 168px;
+    height: 48px;
+    border: 4.5px solid rgba(255, 225, 130, 0.95);
+    border-radius: 50%;
+    transform: rotate(-24deg);
+    pointer-events: none;
+    box-shadow: 0 0 24px rgba(255, 215, 120, 0.7);
+}
+
+.planet-wms {
+    background: radial-gradient(circle at 35% 35%, #38bdf8 0%, #0284c7 50%, #082f49 100%);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.7), inset 0 0 10px rgba(186, 230, 253, 0.6);
+}
+
+.planet-node:hover .planet-wms {
+    box-shadow: 0 0 35px rgba(56, 189, 248, 0.95), 0 0 60px rgba(2, 132, 199, 0.5);
+}
+
+.planet-titan {
+    background: radial-gradient(circle at 35% 35%, #c084fc 0%, #7e22ce 50%, #3b0764 100%);
+    box-shadow: 0 0 25px rgba(192, 132, 252, 0.7), inset 0 0 10px rgba(243, 232, 255, 0.6);
+}
+
+.planet-node:hover .planet-titan {
+    box-shadow: 0 0 35px rgba(192, 132, 252, 0.95), 0 0 60px rgba(126, 34, 206, 0.5);
+}
+
+.planet-pulsar {
+    background: radial-gradient(circle at 35% 35%, #2dd4bf 0%, #0d9488 50%, #042f2e 100%);
+    box-shadow: 0 0 25px rgba(45, 212, 191, 0.7), inset 0 0 10px rgba(204, 251, 241, 0.6);
+}
+
+.planet-node:hover .planet-pulsar {
+    box-shadow: 0 0 35px rgba(45, 212, 191, 0.95), 0 0 60px rgba(13, 148, 136, 0.5);
+}
+
+.planet-apollo {
+    background: radial-gradient(circle at 35% 35%, #4ade80 0%, #16a34a 50%, #052e16 100%);
+    box-shadow: 0 0 25px rgba(74, 222, 128, 0.7), inset 0 0 10px rgba(220, 252, 231, 0.6);
+}
+
+.planet-node:hover .planet-apollo {
+    box-shadow: 0 0 35px rgba(74, 222, 128, 0.95), 0 0 60px rgba(22, 163, 74, 0.5);
+}
+
+.planet-helios {
+    background: radial-gradient(circle at 35% 35%, #facc15 0%, #ca8a04 50%, #422006 100%);
+    box-shadow: 0 0 25px rgba(250, 204, 21, 0.7), inset 0 0 10px rgba(254, 240, 138, 0.6);
+}
+
+.planet-node:hover .planet-helios {
+    box-shadow: 0 0 35px rgba(250, 204, 21, 0.95), 0 0 60px rgba(202, 138, 4, 0.5);
+}
+
+.planet-chronos {
+    background: radial-gradient(circle at 35% 35%, #818cf8 0%, #4f46e5 50%, #1e1b4b 100%);
+    box-shadow: 0 0 25px rgba(129, 140, 248, 0.7), inset 0 0 10px rgba(224, 231, 255, 0.6);
+}
+
+.planet-node:hover .planet-chronos {
+    box-shadow: 0 0 35px rgba(129, 140, 248, 0.95), 0 0 60px rgba(79, 70, 229, 0.5);
+}
+
+.planet-nebula {
+    background: radial-gradient(circle at 35% 35%, #f472b6 0%, #db2777 50%, #500724 100%);
+    box-shadow: 0 0 25px rgba(244, 114, 182, 0.5), inset 0 0 10px rgba(253, 242, 248, 0.5);
+    filter: grayscale(0.2);
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+/* Planet Label */
+.planet-badge {
+    margin-top: 12px;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    background: rgba(5, 8, 22, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.planet-node:hover .planet-badge {
+    background: rgba(0, 212, 255, 0.25);
+    border-color: rgba(0, 212, 255, 0.7);
+    color: #00f5d4;
+    transform: translateY(2px);
+    box-shadow: 0 0 18px rgba(0, 212, 255, 0.5);
+}
+
+/* Holographic Hover Card (Planet HUD) */
+.planet-hud-card {
+    position: absolute;
+    bottom: calc(100% + 20px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px) scale(0.92);
+    width: 290px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+}
+
+.planet-node:hover .planet-hud-card {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* Beacon Ping Dot */
+.status-beacon {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.status-beacon.online {
+    background-color: #10b981;
+    box-shadow: 0 0 10px #10b981;
+}
+
+.status-beacon.online::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid #10b981;
+    animation: beaconPulse 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.status-beacon.locked {
+    background-color: #f59e0b;
+    box-shadow: 0 0 10px #f59e0b;
+}
+
+@keyframes beaconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+@keyframes orbitRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes counterOrbitRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* ==========================================================================
+   OPENING CINEMATIC BOOT SEQUENCE
+   ========================================================================== */
+#cinematic-boot {
+    position: fixed;
+    inset: 0;
+    background-color: #02040b;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+}
+
+#cinematic-boot.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.boot-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to right, rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+.boot-core-spark {
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 30px 10px #00f5d4, 0 0 60px 25px #ffaa00;
+    animation: sparkIgnite 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes sparkIgnite {
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+
+    30% {
+        transform: scale(1.5);
+        opacity: 1;
+        box-shadow: 0 0 40px 15px #00f5d4, 0 0 80px 30px #ffaa00;
+    }
+
+    70% {
+        transform: scale(25);
+        opacity: 0.9;
+        box-shadow: 0 0 120px 40px #00d4ff, 0 0 200px 70px #ff6600;
+    }
+
+    100% {
+        transform: scale(80);
+        opacity: 0;
+    }
+}
+
+.boot-shockwave {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 212, 255, 0.8);
+    animation: shockwaveExpand 1.6s ease-out forwards;
+}
+
+@keyframes shockwaveExpand {
+    0% {
+        transform: scale(0.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(14);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   ANIMATIONS & MICRO-INTERACTIONS
+   ========================================================================== */
+.animate-float-slow {
+    animation: floatSlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatSlow {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.glow-text-cyan {
+    text-shadow: 0 0 20px rgba(0, 245, 212, 0.5), 0 0 40px rgba(0, 245, 212, 0.2);
+}
+
+.glow-text-blue {
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.2);
+}
+
+.glow-text-gold {
+    text-shadow: 0 0 20px rgba(255, 170, 0, 0.6), 0 0 40px rgba(255, 170, 0, 0.3);
+}
+
+.border-gradient {
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+
+.border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.5), rgba(138, 43, 226, 0.2), rgba(0, 245, 212, 0.4));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Scanline / Blueprint overlay */
+.warehouse-scanlines {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 212, 255, 0.02) 50%, rgba(0, 212, 255, 0.02));
+    background-size: 100% 4px;
+    pointer-events: none;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+    background: rgba(3, 6, 17, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+/* Button Shimmer */
+.btn-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: rotate(30deg);
+    transition: all 0.7s ease;
+}
+
+.btn-shimmer:hover::after {
+    left: 140%;
+}
