@@ -100,6 +100,7 @@ export class NovaUniverse {
         this.audioEnabled = !this.audioEnabled;
         const icon = document.getElementById('audio-toggle-icon');
         const text = document.getElementById('audio-toggle-text');
+        const equalizer = document.getElementById('audio-equalizer');
         
         if (this.audioEnabled) {
             if (!this.audioCtx) {
@@ -112,9 +113,17 @@ export class NovaUniverse {
             this.playSynthSound(580, 'sine', 0.1, 0.05);
             if (icon) icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z"/>';
             if (text) text.textContent = 'Audio: ON';
+            if (equalizer) {
+                equalizer.classList.remove('hidden');
+                equalizer.classList.add('flex');
+            }
         } else {
             if (icon) icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>';
             if (text) text.textContent = 'Audio: OFF';
+            if (equalizer) {
+                equalizer.classList.add('hidden');
+                equalizer.classList.remove('flex');
+            }
         }
     }
 

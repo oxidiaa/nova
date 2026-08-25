@@ -68,7 +68,7 @@ class NovaApp {
         // 2. Cinematic Opening Sequence
         this.initCinematicIntro();
 
-        // 3. Live Digital Clock
+        // 3. Live Digital Clock & Date
         this.initClock();
 
         // 4. Render System Directory Grid
@@ -86,11 +86,11 @@ class NovaApp {
         // 8. Notifications Popover
         this.initNotifications();
 
-        // 9. Interactive Zone Floor Map
-        this.initZoneMap();
+        // 9. Real-time Telemetry Ticker in Header
+        this.initTelemetryTicker();
 
-        // 10. Animated Telemetry Counters
-        this.initTelemetryCounters();
+        // 10. Mobile Navigation Drawer
+        this.initMobileNav();
     }
 
     loadFavorites() {
@@ -152,19 +152,37 @@ class NovaApp {
 
     initClock() {
         const clockEl = document.getElementById('nova-live-clock');
+        const mobileClockEl = document.getElementById('mobile-live-clock');
+        const dateEl = document.getElementById('nova-live-date');
+
         const updateClock = () => {
-            if (!clockEl) return;
             const now = new Date();
             // WIB Time (UTC+7)
-            const options = {
+            const timeOptions = {
                 timeZone: 'Asia/Jakarta',
                 hour12: false,
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit'
             };
-            const timeString = new Intl.DateTimeFormat('id-ID', options).format(now);
-            clockEl.textContent = `${timeString} WIB`;
+            const dateOptions = {
+                timeZone: 'Asia/Jakarta',
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            };
+
+            const timeString = new Intl.DateTimeFormat('id-ID', timeOptions).format(now);
+            if (clockEl) {
+                clockEl.textContent = `${timeString} WIB`;
+            }
+            if (mobileClockEl) {
+                mobileClockEl.textContent = `${timeString} WIB`;
+            }
+            if (dateEl) {
+                const dateString = new Intl.DateTimeFormat('id-ID', dateOptions).format(now).toUpperCase();
+                dateEl.textContent = `${dateString} • WH-01`;
+            }
         };
         updateClock();
         setInterval(updateClock, 1000);
@@ -429,42 +447,44 @@ class NovaApp {
         }
     }
 
+    openCommandPalette() {
+        const palette = document.getElementById('nova-command-palette');
+        const paletteInput = document.getElementById('cmd-palette-input');
+        if (!palette) return;
+        palette.classList.remove('hidden');
+        palette.classList.add('flex');
+        if (paletteInput) {
+            paletteInput.value = '';
+            paletteInput.focus();
+            this.renderPaletteResults('');
+        }
+        if (this.universe) this.universe.playSynthSound(620, 'sine', 0.1, 0.04);
+    }
+
+    closeCommandPalette() {
+        const palette = document.getElementById('nova-command-palette');
+        if (!palette) return;
+        palette.classList.add('hidden');
+        palette.classList.remove('flex');
+    }
+
     initCommandPalette() {
         const palette = document.getElementById('nova-command-palette');
         const paletteInput = document.getElementById('cmd-palette-input');
-        const paletteResults = document.getElementById('cmd-palette-results');
         const triggerBtns = document.querySelectorAll('[data-open-cmd-palette]');
 
-        const openPalette = () => {
-            if (!palette) return;
-            palette.classList.remove('hidden');
-            palette.classList.add('flex');
-            if (paletteInput) {
-                paletteInput.value = '';
-                paletteInput.focus();
-                renderPaletteResults('');
-            }
-            if (this.universe) this.universe.playSynthSound(620, 'sine', 0.1, 0.04);
-        };
-
-        const closePalette = () => {
-            if (!palette) return;
-            palette.classList.add('hidden');
-            palette.classList.remove('flex');
-        };
-
-        triggerBtns.forEach(b => b.addEventListener('click', openPalette));
+        triggerBtns.forEach(b => b.addEventListener('click', () => this.openCommandPalette()));
 
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
                 if (palette && !palette.classList.contains('hidden')) {
-                    closePalette();
+                    this.closeCommandPalette();
                 } else {
-                    openPalette();
+                    this.openCommandPalette();
                 }
             } else if (e.key === 'Escape') {
-                closePalette();
+                this.closeCommandPalette();
                 this.closeLaunchModal();
                 this.closeNotifications();
             }
@@ -472,50 +492,51 @@ class NovaApp {
 
         if (palette) {
             palette.addEventListener('click', (e) => {
-                if (e.target === palette) closePalette();
+                if (e.target === palette) this.closeCommandPalette();
             });
         }
 
-        const renderPaletteResults = (query) => {
-            if (!paletteResults) return;
-            const q = query.toLowerCase().trim();
-            const results = WAREHOUSE_SYSTEMS.filter(s => 
-                !q || 
-                s.name.toLowerCase().includes(q) || 
-                s.fullName.toLowerCase().includes(q) ||
-                s.categoryLabel.toLowerCase().includes(q)
-            );
-
-            if (results.length === 0) {
-                paletteResults.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">No warehouse systems matching "${query}"</div>`;
-                return;
-            }
-
-            paletteResults.innerHTML = results.map(s => `
-                <div 
-                    onclick="window.novaApp.openLaunchModal('${s.id}'); document.getElementById('nova-command-palette').classList.add('hidden');"
-                    class="p-3 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent flex items-center justify-between cursor-pointer transition-all group"
-                >
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-orbitron font-bold text-xs text-white ${s.planetClass}">
-                            ${s.name.slice(0, 2)}
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-orbitron font-bold text-sm text-white group-hover:text-cyan-300">${s.name}</span>
-                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400">${s.categoryLabel}</span>
-                            </div>
-                            <p class="text-xs text-slate-400 line-clamp-1">${s.fullName}</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">Launch →</span>
-                </div>
-            `).join('');
-        };
-
         if (paletteInput) {
-            paletteInput.addEventListener('input', (e) => renderPaletteResults(e.target.value));
+            paletteInput.addEventListener('input', (e) => this.renderPaletteResults(e.target.value));
         }
+    }
+
+    renderPaletteResults(query) {
+        const paletteResults = document.getElementById('cmd-palette-results');
+        if (!paletteResults) return;
+        const q = (query || '').toLowerCase().trim();
+        const results = WAREHOUSE_SYSTEMS.filter(s => 
+            !q || 
+            s.name.toLowerCase().includes(q) || 
+            s.fullName.toLowerCase().includes(q) ||
+            s.categoryLabel.toLowerCase().includes(q)
+        );
+
+        if (results.length === 0) {
+            paletteResults.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm font-mono">No warehouse systems matching "${query}"</div>`;
+            return;
+        }
+
+        paletteResults.innerHTML = results.map(s => `
+            <div 
+                onclick="window.novaApp.openLaunchModal('${s.id}'); window.novaApp.closeCommandPalette();"
+                class="p-3 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent flex items-center justify-between cursor-pointer transition-all group"
+            >
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center font-orbitron font-bold text-xs text-white ${s.planetClass}">
+                        ${s.name.slice(0, 2)}
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-orbitron font-bold text-sm text-white group-hover:text-cyan-300">${s.name}</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400">${s.categoryLabel}</span>
+                        </div>
+                        <p class="text-xs text-slate-400 line-clamp-1">${s.fullName}</p>
+                    </div>
+                </div>
+                <span class="text-xs font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">Launch →</span>
+            </div>
+        `).join('');
     }
 
     initNotifications() {
@@ -549,119 +570,58 @@ class NovaApp {
         if (notifDrawer) notifDrawer.classList.add('hidden');
     }
 
-    initZoneMap() {
-        const zoneCards = document.querySelectorAll('[data-zone-id]');
-        const zoneDisplay = document.getElementById('zone-detail-display');
+    initTelemetryTicker() {
+        const tickerEl = document.getElementById('nav-telemetry-text');
+        if (!tickerEl) return;
 
-        const zoneDetails = {
-            'zone-a': {
-                name: 'Zone A — Inbound Receiving & Staging',
-                docks: '8 Active / 2 Scheduled',
-                occupancy: '78% Capacity',
-                temperature: '24.2°C Ambient',
-                lead: 'Budi Pratama (Dock Master)',
-                recent: 'ASN-8902 Verified by SATURNUS (120 pallets Putaway)'
-            },
-            'zone-b': {
-                name: 'Zone B — High-Bay Automated Racks',
-                docks: 'Internal Transfer Aisles 1–24',
-                occupancy: '86.4% Capacity',
-                temperature: '22.0°C Controlled',
-                lead: 'Siti Rahma (ASRS Lead)',
-                recent: 'MARS Auto-Replenishment batch #924 routed to Aisle 14'
-            },
-            'zone-c': {
-                name: 'Zone C — Climate Controlled Cold Chain',
-                docks: 'Cold Dock C1 & C2',
-                occupancy: '64.2% Capacity',
-                temperature: '4.1°C Strict Chilled',
-                lead: 'David Wijaya (Quality Assurance)',
-                recent: 'Cold storage RFID asset telemetry verified via SATURNUS'
-            },
-            'zone-d': {
-                name: 'Zone D — Outbound Sorting & Dispatch',
-                docks: '6 Active Truck Bays',
-                occupancy: '91.8% Velocity',
-                temperature: '25.0°C Ambient',
-                lead: 'Hendro Kusuma (Dispatch Supv)',
-                recent: '14 Expedited Consumable Shipments Dispatched via MARS Requisition'
-            }
-        };
+        const feeds = [
+            { text: 'MARS • 1,840 Daily Orders • 99.98% SLA', color: 'text-orange-300', sysId: 'mars' },
+            { text: 'SATURNUS • 12,480 Active RFID Tags Synced', color: 'text-amber-300', sysId: 'saturnus' },
+            { text: 'GATEWAY NODE • Latency 18ms • WH-01 Nominal', color: 'text-cyan-300', sysId: null },
+            { text: 'SSO CORE • Central Warehouse Protocol Online', color: 'text-emerald-300', sysId: null },
+            { text: 'MARS DISPATCH • Requisition #MR-9042 Active', color: 'text-orange-400', sysId: 'mars' },
+            { text: 'SATURNUS SCAN • Dock 04 Inbound Verified', color: 'text-amber-400', sysId: 'saturnus' }
+        ];
 
-        zoneCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const zoneId = card.getAttribute('data-zone-id');
-                const data = zoneDetails[zoneId];
-                if (!data || !zoneDisplay) return;
-
-                zoneCards.forEach(c => c.classList.remove('border-cyan-400', 'bg-cyan-500/10'));
-                card.classList.add('border-cyan-400', 'bg-cyan-500/10');
-
-                zoneDisplay.innerHTML = `
-                    <div class="space-y-3 font-mono text-sm">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-2">
-                            <h4 class="font-orbitron font-bold text-cyan-300 text-base">${data.name}</h4>
-                            <span class="px-2 py-0.5 text-xs rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Active</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3 text-xs">
-                            <div class="p-2.5 rounded-lg bg-white/5">
-                                <span class="text-slate-400 block">Dock Status</span>
-                                <span class="text-white font-bold">${data.docks}</span>
-                            </div>
-                            <div class="p-2.5 rounded-lg bg-white/5">
-                                <span class="text-slate-400 block">Occupancy</span>
-                                <span class="text-cyan-300 font-bold">${data.occupancy}</span>
-                            </div>
-                            <div class="p-2.5 rounded-lg bg-white/5">
-                                <span class="text-slate-400 block">Environment</span>
-                                <span class="text-amber-300 font-bold">${data.temperature}</span>
-                            </div>
-                            <div class="p-2.5 rounded-lg bg-white/5">
-                                <span class="text-slate-400 block">Zone Lead</span>
-                                <span class="text-white font-bold">${data.lead}</span>
-                            </div>
-                        </div>
-                        <div class="p-3 rounded-lg bg-cyan-950/40 border border-cyan-500/20 text-xs text-cyan-200">
-                            <strong class="text-cyan-400">Live Activity:</strong> ${data.recent}
-                        </div>
-                    </div>
-                `;
-
-                if (this.universe) this.universe.playSynthSound(660, 'sine', 0.08, 0.04);
-            });
-        });
+        let currentIndex = 0;
+        setInterval(() => {
+            tickerEl.style.opacity = '0';
+            tickerEl.style.transform = 'translateY(-4px)';
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % feeds.length;
+                const currentFeed = feeds[currentIndex];
+                tickerEl.textContent = currentFeed.text;
+                tickerEl.className = `font-mono text-[11px] truncate tracking-tight transition-all duration-300 block ${currentFeed.color}`;
+                tickerEl.style.opacity = '1';
+                tickerEl.style.transform = 'translateY(0)';
+            }, 300);
+        }, 4000);
     }
 
-    initTelemetryCounters() {
-        const counters = document.querySelectorAll('[data-counter-target]');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseFloat(el.getAttribute('data-counter-target') || '0');
-                    const suffix = el.getAttribute('data-counter-suffix') || '';
-                    const duration = 1600;
-                    const startTime = performance.now();
+    initMobileNav() {
+        const mobileBtn = document.getElementById('btn-mobile-menu');
+        const mobileDrawer = document.getElementById('mobile-nav-drawer');
+        if (mobileBtn && mobileDrawer) {
+            mobileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileDrawer.classList.toggle('hidden');
+                if (this.universe) this.universe.playSynthSound(500, 'triangle', 0.08, 0.03);
+            });
 
-                    const update = (now) => {
-                        const elapsed = now - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        // Ease out cubic
-                        const current = Math.floor(target * (1 - Math.pow(1 - progress, 3)));
-                        el.textContent = `${current.toLocaleString('id-ID')}${suffix}`;
-                        if (progress < 1) {
-                            requestAnimationFrame(update);
-                        } else {
-                            el.textContent = `${target.toLocaleString('id-ID')}${suffix}`;
-                        }
-                    };
-                    requestAnimationFrame(update);
-                    observer.unobserve(el);
+            // Close when clicking any link/button inside
+            mobileDrawer.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('click', () => {
+                    mobileDrawer.classList.add('hidden');
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!mobileDrawer.contains(e.target) && !mobileBtn.contains(e.target)) {
+                    mobileDrawer.classList.add('hidden');
                 }
             });
-        }, { threshold: 0.2 });
-
-        counters.forEach(c => observer.observe(c));
+        }
     }
 }
 

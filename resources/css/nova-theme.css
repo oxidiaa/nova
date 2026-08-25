@@ -721,6 +721,68 @@ body {
     -webkit-backdrop-filter: blur(14px);
 }
 
+/* Top Nav Light Beam scanning effect */
+.nav-light-beam {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 245, 212, 0.8) 25%, rgba(255, 170, 0, 0.9) 50%, rgba(0, 212, 255, 0.8) 75%, transparent 100%);
+    background-size: 200% 100%;
+    animation: beamScan 6s linear infinite;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+}
+
+@keyframes beamScan {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Soundwave Equalizer Bars */
+.soundwave-bar {
+    width: 2.5px;
+    background: #00f5d4;
+    border-radius: 2px;
+    animation: soundwaveBounce 0.8s ease-in-out infinite alternate;
+    box-shadow: 0 0 6px #00f5d4;
+}
+.soundwave-bar:nth-child(1) {
+    height: 5px;
+    animation-delay: 0.1s;
+}
+.soundwave-bar:nth-child(2) {
+    height: 12px;
+    animation-delay: 0.35s;
+}
+.soundwave-bar:nth-child(3) {
+    height: 7px;
+    animation-delay: 0.2s;
+}
+
+@keyframes soundwaveBounce {
+    0% {
+        transform: scaleY(0.3);
+    }
+    100% {
+        transform: scaleY(1.4);
+    }
+}
+
+/* Quick Node Nav Pill */
+.nav-node-pill {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-node-pill:hover {
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
 /* Button Shimmer */
 .btn-shimmer {
     position: relative;
