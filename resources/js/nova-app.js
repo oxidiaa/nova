@@ -25,7 +25,7 @@ export const WAREHOUSE_SYSTEMS = [
         orbitRing: 1,
         planetClass: 'planet-mars',
         icon: 'rocket',
-        endpoint: '/system/mars',
+        endpoint: window.NOVA_CONFIG?.marsUrl || '/system/mars',
         stats: '1,840 Daily Orders'
     },
     {
@@ -33,7 +33,7 @@ export const WAREHOUSE_SYSTEMS = [
         name: 'SATURNUS',
         fullName: 'Smart Asset Tracking, Unregistration & Registration Network Utility System',
         shortDesc: 'Asset Registration, RFID Telemetry & Decommissioning',
-        fullDesc: 'Enterprise asset management engine managing lifecycle tracking, RFID/Barcode portal scans, maintenance logs, and asset decommissioning protocols.',
+        fullDesc: 'Consumable registration, unregistration approval workflows, RFID asset tracking, and warehouse inventory synchronization.',
         category: 'assets',
         categoryLabel: 'Assets & RFID',
         status: 'online',
@@ -47,7 +47,7 @@ export const WAREHOUSE_SYSTEMS = [
         orbitRing: 2,
         planetClass: 'planet-saturnus',
         icon: 'rfid',
-        endpoint: '/system/saturnus',
+        endpoint: window.NOVA_CONFIG?.saturnusUrl || 'http://127.0.0.1:8001',
         stats: '12,480 Tracked Assets'
     }
 ];
@@ -298,12 +298,12 @@ class NovaApp {
                             </button>
                         ` : `
                             <button 
-                                onclick="window.novaApp.openLaunchModal('${sys.id}')"
+                                onclick="window.novaApp.directLaunch('${sys.id}', event)"
                                 class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r ${sys.gradient} text-white text-xs font-bold font-orbitron tracking-wider shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 flex items-center justify-center gap-2 btn-shimmer group-hover:scale-[1.02]"
                             >
                                 <span>ACCESS SYSTEM</span>
                                 <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                 </svg>
                             </button>
                         `}
@@ -338,6 +338,22 @@ class NovaApp {
         }
     }
 
+    directLaunch(systemId, e) {
+        if (e) e.stopPropagation();
+        const sys = WAREHOUSE_SYSTEMS.find(s => s.id === systemId);
+        const targetUrl = sys?.id === 'saturnus' 
+            ? (window.NOVA_CONFIG?.saturnusUrl || sys?.endpoint || 'http://127.0.0.1:8001') 
+            : (sys?.endpoint || `/system/${systemId}`);
+
+        if (this.universe) this.universe.playSynthSound(750, 'sine', 0.15, 0.06);
+
+        // Open immediately so browser popup blocker does not block user interaction
+        const win = window.open(targetUrl, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+            window.location.href = targetUrl;
+        }
+    }
+
     openLaunchModal(systemId) {
         const sys = WAREHOUSE_SYSTEMS.find(s => s.id === systemId);
         if (!sys) return;
@@ -354,7 +370,13 @@ class NovaApp {
         if (modalTitle) modalTitle.textContent = sys.name;
         if (modalSubtitle) modalSubtitle.textContent = sys.fullName;
         if (modalDesc) modalDesc.textContent = sys.fullDesc;
-        if (modalUrl) modalUrl.textContent = `https://nova.warehouse.corp/apps/${sys.id}`;
+        
+        const targetUrl = sys.id === 'saturnus' ? (window.NOVA_CONFIG?.saturnusUrl || sys.endpoint || 'http://127.0.0.1:8001') : (sys.endpoint || `/system/${sys.id}`);
+        if (modalUrl) {
+            modalUrl.textContent = targetUrl;
+            modalUrl.href = targetUrl;
+        }
+        
         if (modalBadge) {
             modalBadge.textContent = sys.statusLabel;
             modalBadge.className = `text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${sys.badgeColor}`;
@@ -377,8 +399,8 @@ class NovaApp {
         }
 
         if (launchBtn) {
-            launchBtn.onclick = () => {
-                this.simulateLaunch(sys);
+            launchBtn.onclick = (e) => {
+                this.simulateLaunch(sys, e);
             };
         }
 
@@ -398,38 +420,18 @@ class NovaApp {
         }
     }
 
-    simulateLaunch(sys) {
-        const launchBtn = document.getElementById('launch-modal-btn');
-        if (!launchBtn) return;
-
-        launchBtn.innerHTML = `
-            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <span>AUTHENTICATING SSO GATEWAY...</span>
-        `;
-
+    simulateLaunch(sys, e) {
+        if (e) e.stopPropagation();
+        const targetUrl = sys.id === 'saturnus' ? (window.NOVA_CONFIG?.saturnusUrl || sys.endpoint || 'http://127.0.0.1:8001') : (sys.endpoint || `/system/${sys.id}`);
+        
         if (this.universe) this.universe.playSynthSound(750, 'sine', 0.2, 0.06);
+        this.closeLaunchModal();
 
-        setTimeout(() => {
-            launchBtn.innerHTML = `
-                <svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                <span>HANDSHAKE VERIFIED! OPENING...</span>
-            `;
-            setTimeout(() => {
-                this.closeLaunchModal();
-                alert(`[NOVA SSO GATEWAY]\n\nSuccessfully authorized token for ${sys.name} (${sys.fullName}).\nRedirecting to secure warehouse instance: https://nova.warehouse.corp/apps/${sys.id}`);
-                launchBtn.innerHTML = `
-                    <span>LAUNCH PORTAL INSTANCE</span>
-                    <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                    </svg>
-                `;
-            }, 600);
-        }, 1000);
+        // Direct open immediately without async timeout delay to avoid browser popup blocker
+        const win = window.open(targetUrl, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+            window.location.href = targetUrl;
+        }
     }
 
     initLaunchModal() {
@@ -519,7 +521,7 @@ class NovaApp {
 
         paletteResults.innerHTML = results.map(s => `
             <div 
-                onclick="window.novaApp.openLaunchModal('${s.id}'); window.novaApp.closeCommandPalette();"
+                onclick="window.novaApp.directLaunch('${s.id}', event); window.novaApp.closeCommandPalette();"
                 class="p-3 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent flex items-center justify-between cursor-pointer transition-all group"
             >
                 <div class="flex items-center gap-3">

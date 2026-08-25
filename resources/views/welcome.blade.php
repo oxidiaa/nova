@@ -14,6 +14,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Dynamic Subsystems Config -->
+    <script>
+        window.NOVA_CONFIG = {
+            saturnusUrl: @json(env('SATURNUS_URL', 'http://127.0.0.1:8001')),
+            marsUrl: @json(env('MARS_URL', '/system/mars'))
+        };
+    </script>
+
     <!-- Styles & Scripts via Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -119,9 +127,9 @@
                     
                     <!-- MARS Quick Pill -->
                     <button 
-                        onclick="window.novaApp.openLaunchModal('mars')"
+                        onclick="window.novaApp.directLaunch('mars', event)"
                         class="nav-node-pill flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/10 hover:bg-orange-500/25 border border-orange-500/30 text-orange-300 text-[11px] transition-all group/mars"
-                        title="Quick Launch MARS (Material Request System)"
+                        title="Launch MARS (Material Request System)"
                     >
                         <span class="w-1.5 h-1.5 rounded-full bg-orange-400 group-hover/mars:animate-ping"></span>
                         <span class="font-orbitron font-bold">MARS</span>
@@ -130,9 +138,9 @@
 
                     <!-- SATURNUS Quick Pill -->
                     <button 
-                        onclick="window.novaApp.openLaunchModal('saturnus')"
+                        onclick="window.novaApp.directLaunch('saturnus', event)"
                         class="nav-node-pill flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 text-[11px] transition-all group/sat"
-                        title="Quick Launch SATURNUS (Asset Tracking System)"
+                        title="Launch SATURNUS (Asset Tracking System)"
                     >
                         <span class="w-1.5 h-1.5 rounded-full bg-amber-400 group-hover/sat:animate-ping"></span>
                         <span class="font-orbitron font-bold">SATURNUS</span>
@@ -293,11 +301,11 @@
             <div class="pt-1">
                 <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">QUICK SYSTEM LAUNCH:</span>
                 <div class="grid grid-cols-2 gap-2">
-                    <button onclick="window.novaApp.openLaunchModal('mars')" class="p-2.5 rounded-xl bg-orange-500/15 border border-orange-500/30 text-orange-300 font-orbitron font-bold text-xs flex items-center justify-center gap-2">
+                    <button onclick="window.novaApp.directLaunch('mars', event)" class="p-2.5 rounded-xl bg-orange-500/15 border border-orange-500/30 text-orange-300 font-orbitron font-bold text-xs flex items-center justify-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-400"></span>
                         MARS
                     </button>
-                    <button onclick="window.novaApp.openLaunchModal('saturnus')" class="p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-orbitron font-bold text-xs flex items-center justify-center gap-2">
+                    <button onclick="window.novaApp.directLaunch('saturnus', event)" class="p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-orbitron font-bold text-xs flex items-center justify-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-400"></span>
                         SATURNUS
                     </button>
@@ -434,13 +442,23 @@
                     <div class="planet-node" style="top: -52px; left: calc(50% - 52px);">
                         <div class="planet-counter-rotator" style="animation-duration: 24s;">
                             
-                            <!-- Planet Sphere -->
-                            <div class="planet-body planet-mars">
-                                <span class="text-white text-2xl font-black font-orbitron select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">M</span>
+                            <!-- Planet Sphere (Directly Clickable) -->
+                            <div 
+                                class="planet-body planet-mars cursor-pointer group/marsplanet"
+                                title="Click to Launch MARS"
+                                onclick="window.novaApp.directLaunch('mars', event)"
+                            >
+                                <span class="text-white text-2xl font-black font-orbitron select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover/marsplanet:scale-125 transition-transform">M</span>
                             </div>
                             
                             <!-- Planet Label -->
-                            <div class="planet-badge">🪐 MARS</div>
+                            <div 
+                                class="planet-badge cursor-pointer"
+                                title="Click to Launch MARS"
+                                onclick="window.novaApp.directLaunch('mars', event)"
+                            >
+                                🪐 MARS
+                            </div>
 
                             <!-- Holographic Hover Card (Planet HUD) -->
                             <div class="planet-hud-card glass-panel-glow rounded-2xl p-5">
@@ -458,15 +476,23 @@
                                     <span class="text-emerald-400">● Online (99.98%)</span>
                                     <span>Ping: 18ms</span>
                                 </div>
-                                <button 
-                                    onclick="window.novaApp.openLaunchModal('mars')"
-                                    class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold font-orbitron tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-orange-500/30 btn-shimmer"
-                                >
-                                    <span>ACCESS SYSTEM</span>
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                                    </svg>
-                                </button>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button 
+                                        onclick="window.novaApp.directLaunch('mars', event)"
+                                        class="py-2 px-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold font-orbitron tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-orange-500/30 btn-shimmer"
+                                    >
+                                        <span>LAUNCH</span>
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                        </svg>
+                                    </button>
+                                    <button 
+                                        onclick="window.novaApp.openLaunchModal('mars')"
+                                        class="py-2 px-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 hover:text-white text-[11px] font-mono flex items-center justify-center"
+                                    >
+                                        <span>SSO INFO</span>
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
@@ -484,39 +510,59 @@
                     <div class="planet-node" style="top: calc(50% - 52px); right: -52px;">
                         <div class="planet-counter-rotator" style="animation-duration: 38s;">
                             
-                            <!-- Planet Sphere -->
-                            <div class="planet-body planet-saturnus">
-                                <span class="text-white text-2xl font-black font-orbitron select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">S</span>
+                            <!-- Planet Sphere (Directly Clickable to Saturnus!) -->
+                            <div 
+                                class="planet-body planet-saturnus cursor-pointer group/saturnplanet"
+                                title="Click to Launch SATURNUS (Direct to Registrasi Consumable)"
+                                onclick="window.novaApp.directLaunch('saturnus', event)"
+                            >
+                                <span class="text-white text-2xl font-black font-orbitron select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover/saturnplanet:scale-125 transition-transform">S</span>
                             </div>
                             
                             <!-- Planet Label -->
-                            <div class="planet-badge">🪐 SATURNUS</div>
+                            <div 
+                                class="planet-badge cursor-pointer"
+                                title="Click to Launch SATURNUS"
+                                onclick="window.novaApp.directLaunch('saturnus', event)"
+                            >
+                                🪐 SATURNUS
+                            </div>
 
                             <!-- Holographic Hover Card -->
                             <div class="planet-hud-card glass-panel-glow rounded-2xl p-5">
                                 <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
                                     <div>
                                         <h4 class="font-orbitron font-bold text-base text-amber-300">SATURNUS</h4>
-                                        <span class="text-[10px] text-slate-400 line-clamp-1">Smart Asset Tracking Network System</span>
+                                        <span class="text-[10px] text-slate-400 line-clamp-1">Consumable Registration & RFID Utility</span>
                                     </div>
                                     <span class="status-beacon online"></span>
                                 </div>
                                 <p class="text-xs text-slate-300 mb-3 leading-relaxed">
-                                    Asset Registration, RFID Tracking & Decommissioning Utility System.
+                                    Registrasi & Unregistrasi Consumable, RFID Tracking & Decommissioning Utility System.
                                 </p>
                                 <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-3">
                                     <span class="text-emerald-400">● Online (12.4k RFID)</span>
                                     <span>Ping: 24ms</span>
                                 </div>
-                                <button 
-                                    onclick="window.novaApp.openLaunchModal('saturnus')"
-                                    class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 text-slate-950 font-bold font-orbitron text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/30 btn-shimmer"
-                                >
-                                    <span>ACCESS SYSTEM</span>
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                                    </svg>
-                                </button>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a 
+                                        href="{{ env('SATURNUS_URL', 'http://127.0.0.1:8001') }}"
+                                        target="_blank"
+                                        onclick="event.stopPropagation(); if(window.novaApp?.universe) window.novaApp.universe.playSynthSound(750, 'sine', 0.15, 0.06);"
+                                        class="py-2 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 text-slate-950 font-bold font-orbitron text-xs tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-amber-500/30 btn-shimmer hover:brightness-110"
+                                    >
+                                        <span>LAUNCH</span>
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                        </svg>
+                                    </a>
+                                    <button 
+                                        onclick="window.novaApp.openLaunchModal('saturnus')"
+                                        class="py-2 px-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 hover:text-white text-[11px] font-mono flex items-center justify-center"
+                                    >
+                                        <span>SSO INFO</span>
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
