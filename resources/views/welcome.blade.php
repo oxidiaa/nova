@@ -17,8 +17,8 @@
     <!-- Dynamic Subsystems Config -->
     <script>
         window.NOVA_CONFIG = {
-            saturnusUrl: @json(env('SATURNUS_URL', 'http://127.0.0.1:8001')),
-            marsUrl: @json(env('MARS_URL', '/system/mars'))
+            saturnusUrl: @json(env('SATURNUS_URL', 'http://127.0.0.1:8003')),
+            marsUrl: @json(env('MARS_URL', 'http://127.0.0.1:8082'))
         };
     </script>
 
@@ -505,7 +505,7 @@
                                 </div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <a 
-                                        href="{{ env('SATURNUS_URL', 'http://127.0.0.1:8001') }}"
+                                        href="{{ env('SATURNUS_URL', 'http://127.0.0.1:8003') }}"
                                         target="_blank"
                                         onclick="event.stopPropagation(); if(window.novaApp?.universe) window.novaApp.universe.playSynthSound(750, 'sine', 0.15, 0.06);"
                                         class="py-2 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 text-slate-950 font-bold font-orbitron text-xs tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-amber-500/30 btn-shimmer hover:brightness-110"
@@ -635,7 +635,7 @@
                     class="system-directory-card glass-card rounded-2xl p-6 relative flex flex-col justify-between group overflow-hidden border border-white/10 hover:border-cyan-400/40"
                     data-sys-id="mars"
                     data-sys-category="operations"
-                    data-sys-url="{{ env('MARS_URL', '/system/mars') }}"
+                    data-sys-url="{{ env('MARS_URL', 'http://127.0.0.1:8082') }}"
                     data-search-terms="mars metalart automatic request system material permintaan reorder consumable"
                 >
                     <!-- Ambient Glow Flare -->
@@ -715,7 +715,7 @@
                     class="system-directory-card glass-card rounded-2xl p-6 relative flex flex-col justify-between group overflow-hidden border border-white/10 hover:border-cyan-400/40"
                     data-sys-id="saturnus"
                     data-sys-category="assets"
-                    data-sys-url="{{ env('SATURNUS_URL', 'http://127.0.0.1:8001') }}"
+                    data-sys-url="{{ env('SATURNUS_URL', 'http://127.0.0.1:8003') }}"
                     data-search-terms="saturnus smart asset tracking rfid consumable unregistration registration utilitas"
                 >
                     <!-- Ambient Glow Flare -->
