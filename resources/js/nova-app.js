@@ -10,13 +10,13 @@ export const WAREHOUSE_SYSTEMS = [
         id: 'mars',
         name: 'MARS',
         fullName: 'Metalart Automatic Request System',
-        shortDesc: 'Material Request, Ordering & Requisition Workflow',
-        fullDesc: 'Centralized ordering platform for warehouse materials, spare parts, packaging consumables, and expedited procurement with multi-tier approval chains.',
+        shortDesc: 'Alur Kerja Permintaan Material, Pemesanan & Rekuisisi',
+        fullDesc: 'Memonitor ketersediaan stok dan melakukan proses reorder/pemesanan ulang item yang persediaannya sudah berada pada level minimum.',
         category: 'operations',
-        categoryLabel: 'Material & Request',
+        categoryLabel: 'Permintaan & Material',
         status: 'online',
-        statusLabel: '● Online (99.98% Uptime)',
-        uptime: '99.98%',
+        statusLabel: '● Online (Uptime 99,98%)',
+        uptime: '99,98%',
         latency: '18ms',
         version: 'v3.8.2',
         color: '#ff6b00',
@@ -26,19 +26,19 @@ export const WAREHOUSE_SYSTEMS = [
         planetClass: 'planet-mars',
         icon: 'rocket',
         endpoint: window.NOVA_CONFIG?.marsUrl || '/system/mars',
-        stats: '1,840 Daily Orders'
+        stats: '1.840 Permintaan Harian'
     },
     {
         id: 'saturnus',
         name: 'SATURNUS',
         fullName: 'Smart Asset Tracking, Unregistration & Registration Network Utility System',
-        shortDesc: 'Asset Registration, RFID Telemetry & Decommissioning',
-        fullDesc: 'Consumable registration, unregistration approval workflows, RFID asset tracking, and warehouse inventory synchronization.',
+        shortDesc: 'Registrasi Aset, Telemetri RFID & Penonaktifan',
+        fullDesc: 'Registrasi barang consumable, alur persetujuan unregistrasi, pelacakan aset RFID, dan sinkronisasi inventaris gudang secara real-time.',
         category: 'assets',
-        categoryLabel: 'Assets & RFID',
+        categoryLabel: 'Aset & RFID',
         status: 'online',
-        statusLabel: '● Online (12,480 Active RFID Tags)',
-        uptime: '99.95%',
+        statusLabel: '● Online (12.480 Tag RFID Aktif)',
+        uptime: '99,95%',
         latency: '24ms',
         version: 'v4.1.0',
         color: '#e09f3e',
@@ -48,7 +48,7 @@ export const WAREHOUSE_SYSTEMS = [
         planetClass: 'planet-saturnus',
         icon: 'rfid',
         endpoint: window.NOVA_CONFIG?.saturnusUrl || 'http://127.0.0.1:8001',
-        stats: '12,480 Tracked Assets'
+        stats: '12.480 Aset Terlacak'
     }
 ];
 
@@ -104,7 +104,7 @@ class NovaApp {
     saveFavorites() {
         try {
             localStorage.setItem('nova_fav_systems', JSON.stringify(this.favorites));
-        } catch (e) {}
+        } catch (e) { }
     }
 
     toggleFavorite(systemId, e) {
@@ -189,128 +189,58 @@ class NovaApp {
     }
 
     renderSystemGrid() {
-        const gridContainer = document.getElementById('system-directory-grid');
-        if (!gridContainer) return;
+        const cards = document.querySelectorAll('.system-directory-card');
+        const emptyState = document.getElementById('system-empty-state');
+        const q = (this.searchQuery || '').toLowerCase().trim();
+        let visibleCount = 0;
 
-        let filtered = WAREHOUSE_SYSTEMS.filter(sys => {
-            const matchesCategory = 
-                this.currentFilter === 'all' || 
-                (this.currentFilter === 'favorites' && this.favorites.includes(sys.id)) ||
-                (this.currentFilter === sys.category);
-            
-            const q = this.searchQuery.toLowerCase().trim();
-            const matchesQuery = !q || 
-                sys.name.toLowerCase().includes(q) || 
-                sys.fullName.toLowerCase().includes(q) || 
-                sys.shortDesc.toLowerCase().includes(q) ||
-                sys.categoryLabel.toLowerCase().includes(q);
+        cards.forEach(card => {
+            const sysId = card.getAttribute('data-sys-id');
+            const category = card.getAttribute('data-sys-category');
+            const isFav = this.favorites.includes(sysId);
+            const searchTerms = (card.getAttribute('data-search-terms') || '').toLowerCase();
+            const textContent = (card.textContent || '').toLowerCase();
+            const combinedSearch = `${searchTerms} ${textContent}`;
 
-            return matchesCategory && matchesQuery;
+            const matchesCategory =
+                this.currentFilter === 'all' ||
+                (this.currentFilter === 'favorites' && isFav) ||
+                (this.currentFilter === category);
+
+            const matchesQuery = !q || combinedSearch.includes(q);
+
+            if (matchesCategory && matchesQuery) {
+                card.classList.remove('hidden');
+                card.classList.add('flex');
+                visibleCount++;
+            } else {
+                card.classList.add('hidden');
+                card.classList.remove('flex');
+            }
+
+            // Update favorite star visual
+            const favSvg = card.querySelector('.btn-fav-star svg');
+            const favBtn = card.querySelector('.btn-fav-star');
+            if (favSvg) {
+                if (isFav) {
+                    favSvg.classList.add('text-amber-400', 'fill-amber-400');
+                    if (favBtn) favBtn.title = 'Hapus dari favorit';
+                } else {
+                    favSvg.classList.remove('text-amber-400', 'fill-amber-400');
+                    if (favBtn) favBtn.title = 'Sematkan ke favorit';
+                }
+            }
         });
 
-        if (filtered.length === 0) {
-            gridContainer.innerHTML = `
-                <div class="col-span-full py-16 text-center">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 mb-4">
-                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold font-orbitron text-white">No Systems Found</h3>
-                    <p class="text-slate-400 text-sm mt-1 max-w-md mx-auto">No warehouse applications matched "${this.searchQuery}". Try searching for MARS, SATURNUS, or WMS.</p>
-                </div>
-            `;
-            return;
+        if (emptyState) {
+            if (visibleCount === 0) {
+                emptyState.classList.remove('hidden');
+                const queryText = emptyState.querySelector('.search-query-text');
+                if (queryText) queryText.textContent = this.searchQuery;
+            } else {
+                emptyState.classList.add('hidden');
+            }
         }
-
-        gridContainer.innerHTML = filtered.map(sys => {
-            const isFav = this.favorites.includes(sys.id);
-            const isLocked = sys.status === 'coming_soon';
-
-            return `
-                <div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between group overflow-hidden border border-white/10 hover:border-cyan-400/40">
-                    <!-- Ambient Glow Flare -->
-                    <div class="absolute -right-12 -top-12 w-32 h-32 rounded-full blur-2xl opacity-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-40" style="background-color: ${sys.color};"></div>
-                    
-                    <!-- Card Top Header -->
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-xl flex items-center justify-center font-orbitron font-bold text-white shadow-lg ${sys.planetClass}">
-                                    ${sys.name.slice(0, 2)}
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <h3 class="font-orbitron font-bold text-lg text-white group-hover:text-cyan-300 transition-colors">
-                                            ${sys.name}
-                                        </h3>
-                                        <span class="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full border ${sys.badgeColor}">
-                                            ${sys.categoryLabel}
-                                        </span>
-                                    </div>
-                                    <span class="text-xs text-slate-400 line-clamp-1">${sys.fullName}</span>
-                                </div>
-                            </div>
-
-                            <!-- Favorite Star Button -->
-                            <button 
-                                onclick="window.novaApp.toggleFavorite('${sys.id}', event)" 
-                                class="p-2 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-white/5 transition-colors"
-                                title="${isFav ? 'Remove from favorites' : 'Pin to favorites'}"
-                            >
-                                <svg class="w-5 h-5 ${isFav ? 'text-amber-400 fill-amber-400' : ''}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <!-- Short Description -->
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                            ${sys.fullDesc}
-                        </p>
-
-                        <!-- Telemetry Grid Pills -->
-                        <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/5 font-mono text-xs mb-4">
-                            <div class="flex items-center gap-1.5 text-slate-300">
-                                <span class="status-beacon ${isLocked ? 'locked' : 'online'}"></span>
-                                <span class="text-[11px]">${isLocked ? 'Locked' : 'Operational'}</span>
-                            </div>
-                            <div class="text-right text-slate-400 text-[11px]">
-                                Ping: <span class="text-cyan-300">${sys.latency}</span>
-                            </div>
-                            <div class="text-slate-400 text-[11px]">
-                                Metrics: <span class="text-slate-200">${sys.stats}</span>
-                            </div>
-                            <div class="text-right text-slate-400 text-[11px]">
-                                Rel: <span class="text-emerald-400">${sys.version}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Action Launch Button -->
-                    <div>
-                        ${isLocked ? `
-                            <button disabled class="w-full py-2.5 px-4 rounded-xl bg-slate-800/60 border border-slate-700 text-slate-400 text-xs font-bold font-orbitron tracking-wider flex items-center justify-center gap-2 cursor-not-allowed">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                                </svg>
-                                COMING SOON
-                            </button>
-                        ` : `
-                            <button 
-                                onclick="window.novaApp.directLaunch('${sys.id}', event)"
-                                class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r ${sys.gradient} text-white text-xs font-bold font-orbitron tracking-wider shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 flex items-center justify-center gap-2 btn-shimmer group-hover:scale-[1.02]"
-                            >
-                                <span>ACCESS SYSTEM</span>
-                                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                </svg>
-                            </button>
-                        `}
-                    </div>
-                </div>
-            `;
-        }).join('');
     }
 
     initFiltersAndSearch() {
@@ -340,10 +270,9 @@ class NovaApp {
 
     directLaunch(systemId, e) {
         if (e) e.stopPropagation();
-        const sys = WAREHOUSE_SYSTEMS.find(s => s.id === systemId);
-        const targetUrl = sys?.id === 'saturnus' 
-            ? (window.NOVA_CONFIG?.saturnusUrl || sys?.endpoint || 'http://127.0.0.1:8001') 
-            : (sys?.endpoint || `/system/${systemId}`);
+        const card = document.querySelector(`.system-directory-card[data-sys-id="${systemId}"]`);
+        const targetUrl = card?.getAttribute('data-sys-url')
+            || (systemId === 'saturnus' ? (window.NOVA_CONFIG?.saturnusUrl || 'http://127.0.0.1:8001') : (window.NOVA_CONFIG?.marsUrl || `/system/${systemId}`));
 
         if (this.universe) this.universe.playSynthSound(750, 'sine', 0.15, 0.06);
 
@@ -355,9 +284,7 @@ class NovaApp {
     }
 
     openLaunchModal(systemId) {
-        const sys = WAREHOUSE_SYSTEMS.find(s => s.id === systemId);
-        if (!sys) return;
-
+        const card = document.querySelector(`.system-directory-card[data-sys-id="${systemId}"]`);
         const modal = document.getElementById('nova-launch-modal');
         const modalTitle = document.getElementById('launch-modal-title');
         const modalSubtitle = document.getElementById('launch-modal-subtitle');
@@ -367,40 +294,57 @@ class NovaApp {
         const modalStats = document.getElementById('launch-modal-stats');
         const launchBtn = document.getElementById('launch-modal-btn');
 
-        if (modalTitle) modalTitle.textContent = sys.name;
-        if (modalSubtitle) modalSubtitle.textContent = sys.fullName;
-        if (modalDesc) modalDesc.textContent = sys.fullDesc;
-        
-        const targetUrl = sys.id === 'saturnus' ? (window.NOVA_CONFIG?.saturnusUrl || sys.endpoint || 'http://127.0.0.1:8001') : (sys.endpoint || `/system/${sys.id}`);
+        const name = card?.querySelector('.sys-name')?.textContent.trim() || systemId.toUpperCase();
+        const fullName = card?.querySelector('.sys-fullname')?.textContent.trim() || '';
+        const desc = card?.querySelector('.sys-desc')?.textContent.trim() || '';
+        const latency = card?.querySelector('.sys-latency')?.textContent.trim() || '18ms';
+        const stats = card?.querySelector('.sys-stats')?.textContent.trim() || '';
+        const version = card?.querySelector('.sys-version')?.textContent.trim() || 'v3.8.2';
+        const statusLabel = card?.querySelector('.sys-status-label')?.textContent.trim() || '● Online';
+        const badgeElem = card?.querySelector('.sys-badge');
+        const badgeColor = badgeElem ? badgeElem.className : 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
+        const targetUrl = card?.getAttribute('data-sys-url')
+            || (systemId === 'saturnus' ? (window.NOVA_CONFIG?.saturnusUrl || 'http://127.0.0.1:8001') : (window.NOVA_CONFIG?.marsUrl || `/system/${systemId}`));
+
+        if (modalTitle) modalTitle.textContent = name;
+        if (modalSubtitle) modalSubtitle.textContent = fullName;
+        if (modalDesc) modalDesc.textContent = desc;
+
         if (modalUrl) {
             modalUrl.textContent = targetUrl;
             modalUrl.href = targetUrl;
         }
-        
+
         if (modalBadge) {
-            modalBadge.textContent = sys.statusLabel;
-            modalBadge.className = `text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${sys.badgeColor}`;
+            modalBadge.textContent = statusLabel;
+            modalBadge.className = `text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${badgeColor}`;
         }
         if (modalStats) {
             modalStats.innerHTML = `
                 <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                    <span class="text-xs text-slate-400 block font-mono">Uptime</span>
-                    <span class="text-sm font-bold text-emerald-400 font-mono">${sys.uptime}</span>
+                    <span class="text-xs text-slate-400 block font-mono">Waktu Aktif</span>
+                    <span class="text-sm font-bold text-emerald-400 font-mono">99,98%</span>
                 </div>
                 <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                    <span class="text-xs text-slate-400 block font-mono">Latency</span>
-                    <span class="text-sm font-bold text-cyan-300 font-mono">${sys.latency}</span>
+                    <span class="text-xs text-slate-400 block font-mono">Latensi</span>
+                    <span class="text-sm font-bold text-cyan-300 font-mono">${latency}</span>
                 </div>
                 <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                    <span class="text-xs text-slate-400 block font-mono">Release</span>
-                    <span class="text-sm font-bold text-white font-mono">${sys.version}</span>
+                    <span class="text-xs text-slate-400 block font-mono">Versi Rilis</span>
+                    <span class="text-sm font-bold text-white font-mono">${version}</span>
                 </div>
             `;
         }
 
         if (launchBtn) {
             launchBtn.onclick = (e) => {
-                this.simulateLaunch(sys, e);
+                if (e) e.stopPropagation();
+                if (this.universe) this.universe.playSynthSound(750, 'sine', 0.2, 0.06);
+                this.closeLaunchModal();
+                const win = window.open(targetUrl, '_blank');
+                if (!win || win.closed || typeof win.closed === 'undefined') {
+                    window.location.href = targetUrl;
+                }
             };
         }
 
@@ -423,7 +367,7 @@ class NovaApp {
     simulateLaunch(sys, e) {
         if (e) e.stopPropagation();
         const targetUrl = sys.id === 'saturnus' ? (window.NOVA_CONFIG?.saturnusUrl || sys.endpoint || 'http://127.0.0.1:8001') : (sys.endpoint || `/system/${sys.id}`);
-        
+
         if (this.universe) this.universe.playSynthSound(750, 'sine', 0.2, 0.06);
         this.closeLaunchModal();
 
@@ -507,38 +451,45 @@ class NovaApp {
         const paletteResults = document.getElementById('cmd-palette-results');
         if (!paletteResults) return;
         const q = (query || '').toLowerCase().trim();
-        const results = WAREHOUSE_SYSTEMS.filter(s => 
-            !q || 
-            s.name.toLowerCase().includes(q) || 
-            s.fullName.toLowerCase().includes(q) ||
-            s.categoryLabel.toLowerCase().includes(q)
-        );
+        const cards = Array.from(document.querySelectorAll('.system-directory-card'));
+        const results = cards.filter(card => {
+            if (!q) return true;
+            const text = `${card.getAttribute('data-search-terms') || ''} ${card.textContent || ''}`.toLowerCase();
+            return text.includes(q);
+        });
 
         if (results.length === 0) {
-            paletteResults.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm font-mono">No warehouse systems matching "${query}"</div>`;
+            paletteResults.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm font-mono">Tidak ada sistem gudang yang cocok dengan "${query}"</div>`;
             return;
         }
 
-        paletteResults.innerHTML = results.map(s => `
-            <div 
-                onclick="window.novaApp.directLaunch('${s.id}', event); window.novaApp.closeCommandPalette();"
-                class="p-3 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent flex items-center justify-between cursor-pointer transition-all group"
-            >
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center font-orbitron font-bold text-xs text-white ${s.planetClass}">
-                        ${s.name.slice(0, 2)}
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="font-orbitron font-bold text-sm text-white group-hover:text-cyan-300">${s.name}</span>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400">${s.categoryLabel}</span>
+        paletteResults.innerHTML = results.map(card => {
+            const id = card.getAttribute('data-sys-id');
+            const name = card.querySelector('.sys-name')?.textContent.trim() || id.toUpperCase();
+            const fullName = card.querySelector('.sys-fullname')?.textContent.trim() || '';
+            const catLabel = card.querySelector('.sys-badge')?.textContent.trim() || '';
+            const planetClass = id === 'mars' ? 'planet-mars' : 'planet-saturnus';
+            return `
+                <div 
+                    onclick="window.novaApp.directLaunch('${id}', event); window.novaApp.closeCommandPalette();"
+                    class="p-3 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent flex items-center justify-between cursor-pointer transition-all group"
+                >
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-orbitron font-bold text-xs text-white ${planetClass}">
+                            ${name.slice(0, 2)}
                         </div>
-                        <p class="text-xs text-slate-400 line-clamp-1">${s.fullName}</p>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-orbitron font-bold text-sm text-white group-hover:text-cyan-300">${name}</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-400">${catLabel}</span>
+                            </div>
+                            <p class="text-xs text-slate-400 line-clamp-1">${fullName}</p>
+                        </div>
                     </div>
+                    <span class="text-xs font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">Buka →</span>
                 </div>
-                <span class="text-xs font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">Launch →</span>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     initNotifications() {
@@ -577,19 +528,19 @@ class NovaApp {
         if (!tickerEl) return;
 
         const feeds = [
-            { text: 'MARS • 1,840 Daily Orders • 99.98% SLA', color: 'text-orange-300', sysId: 'mars' },
-            { text: 'SATURNUS • 12,480 Active RFID Tags Synced', color: 'text-amber-300', sysId: 'saturnus' },
-            { text: 'GATEWAY NODE • Latency 18ms • WH-01 Nominal', color: 'text-cyan-300', sysId: null },
-            { text: 'SSO CORE • Central Warehouse Protocol Online', color: 'text-emerald-300', sysId: null },
-            { text: 'MARS DISPATCH • Requisition #MR-9042 Active', color: 'text-orange-400', sysId: 'mars' },
-            { text: 'SATURNUS SCAN • Dock 04 Inbound Verified', color: 'text-amber-400', sysId: 'saturnus' }
+            { text: 'MARS • 1.840 Permintaan Harian • SLA 99,98%', color: 'text-orange-300', sysId: 'mars' },
+            { text: 'SATURNUS • 12.480 Tag RFID Aktif Tersinkronisasi', color: 'text-amber-300', sysId: 'saturnus' },
+            { text: 'SIMPUL GATEWAY • Latensi 18ms • WH-01 Normal', color: 'text-cyan-300', sysId: null },
+            { text: 'CORE SSO • Protokol Pusat Pergudangan Online', color: 'text-emerald-300', sysId: null },
+            { text: 'PENGIRIMAN MARS • Rekuisisi #MR-9042 Aktif', color: 'text-orange-400', sysId: 'mars' },
+            { text: 'PEMINDAIAN SATURNUS • Inbound Dock 04 Terverifikasi', color: 'text-amber-400', sysId: 'saturnus' }
         ];
 
         let currentIndex = 0;
         setInterval(() => {
             tickerEl.style.opacity = '0';
             tickerEl.style.transform = 'translateY(-4px)';
-            
+
             setTimeout(() => {
                 currentIndex = (currentIndex + 1) % feeds.length;
                 const currentFeed = feeds[currentIndex];

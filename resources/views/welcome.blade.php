@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NOVA — Network Of Warehouse Access. One Portal, All Warehouse Information. Central gateway and digital solar system for enterprise warehouse operations.">
-    <meta name="keywords" content="NOVA, Warehouse Portal, MARS, SATURNUS, WMS, Inventory, Enterprise Warehouse, Logistics Portal">
+    <meta name="description" content="NOVA — Network Of Warehouse Access. Satu Portal, Semua Informasi Gudang. Gateway pusat dan tata surya digital untuk operasional pergudangan enterprise.">
+    <meta name="keywords" content="NOVA, Portal Gudang, MARS, SATURNUS, WMS, Inventaris, Gudang Enterprise, Portal Logistik">
     <meta name="theme-color" content="#050816">
 
-    <title>NOVA — Network Of Warehouse Access | One Portal, All Warehouse Information</title>
+    <title>NOVA — Network Of Warehouse Access | Satu Portal, Semua Informasi Gudang</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
         <div class="relative z-10 text-center px-4">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-4 tracking-widest uppercase">
                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                <span>INITIALIZING NOVA CORE v3.8</span>
+                <span>MEMULAI NOVA CORE v3.8</span>
             </div>
             
             <h1 class="text-4xl md:text-6xl font-black font-orbitron tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-cyan-200 to-white glow-text-cyan mb-2">
@@ -54,12 +54,12 @@
             </div>
 
             <p class="text-[11px] font-mono text-cyan-400/70 mt-4 tracking-wider">
-                “One Portal, All Warehouse Information”
+                “Satu Portal, Semua Informasi Gudang”
             </p>
         </div>
 
         <button id="btn-skip-boot" class="absolute bottom-8 right-8 px-4 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-400 hover:text-white transition-all">
-            SKIP INTRO [ESC]
+            LEWATI INTRO [ESC]
         </button>
     </div>
 
@@ -80,7 +80,7 @@
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2 lg:gap-4">
             
             <!-- Left: Holographic Sun Core & Brand Identity -->
-            <a href="#" class="flex items-center gap-3 group shrink-0" title="NOVA Central Gateway">
+            <a href="#" class="flex items-center gap-3 group shrink-0" title="Gateway Pusat NOVA">
                 <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-cyan-400 p-[1px] shadow-lg shadow-orange-500/20 group-hover:shadow-cyan-400/40 transition-all duration-300">
                     <div class="w-full h-full bg-[#070c20] rounded-[11px] flex items-center justify-center relative overflow-hidden">
                         <!-- Sun Core -->
@@ -112,24 +112,24 @@
                 <nav class="flex items-center p-1 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md">
                     <a href="#hero-solar-system" class="px-3.5 py-1.5 rounded-lg text-xs font-bold font-orbitron tracking-wider text-cyan-300 bg-cyan-500/15 border border-cyan-500/30 hover:bg-cyan-500/25 transition-all flex items-center gap-1.5">
                         <span class="text-xs">🌌</span>
-                        <span>SOLAR ORBIT</span>
+                        <span>ORBIT SURYA</span>
                     </a>
                     <a href="#system-directory-section" class="px-3.5 py-1.5 rounded-lg text-xs font-bold font-orbitron tracking-wider text-slate-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5">
                         <span class="text-xs">📑</span>
-                        <span>DIRECTORY</span>
+                        <span>DIREKTORI SISTEM</span>
                         <span class="px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-mono">2</span>
                     </a>
                 </nav>
 
                 <!-- Quick Node Launch Badges (MARS & SATURNUS Direct Access) -->
                 <div class="flex items-center gap-1.5 px-2 py-1 rounded-xl bg-white/[0.03] border border-white/10 font-mono text-xs">
-                    <span class="text-[10px] text-slate-500 font-bold px-1 uppercase tracking-wider">NODES:</span>
+                    <span class="text-[10px] text-slate-500 font-bold px-1 uppercase tracking-wider">SIMPUL:</span>
                     
                     <!-- MARS Quick Pill -->
                     <button 
                         onclick="window.novaApp.directLaunch('mars', event)"
                         class="nav-node-pill flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-500/10 hover:bg-orange-500/25 border border-orange-500/30 text-orange-300 text-[11px] transition-all group/mars"
-                        title="Launch MARS (Material Request System)"
+                        title="Buka MARS (Sistem Permintaan Material)"
                     >
                         <span class="w-1.5 h-1.5 rounded-full bg-orange-400 group-hover/mars:animate-ping"></span>
                         <span class="font-orbitron font-bold">MARS</span>
@@ -140,7 +140,7 @@
                     <button 
                         onclick="window.novaApp.directLaunch('saturnus', event)"
                         class="nav-node-pill flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 text-[11px] transition-all group/sat"
-                        title="Launch SATURNUS (Asset Tracking System)"
+                        title="Buka SATURNUS (Sistem Pelacakan Aset)"
                     >
                         <span class="w-1.5 h-1.5 rounded-full bg-amber-400 group-hover/sat:animate-ping"></span>
                         <span class="font-orbitron font-bold">SATURNUS</span>
@@ -156,7 +156,7 @@
                     </span>
                     <div class="overflow-hidden">
                         <span id="nav-telemetry-text" class="font-mono text-[11px] text-cyan-300 truncate block">
-                            MARS • 1,840 Daily Orders • 99.98% SLA
+                            MARS • 1.840 Permintaan Harian • SLA 99,98%
                         </span>
                     </div>
                 </div>
@@ -181,12 +181,12 @@
                 <button 
                     data-open-cmd-palette
                     class="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-500/30 text-xs text-slate-300 hover:text-white transition-all group"
-                    title="Press Ctrl + K to search systems"
+                    title="Tekan Ctrl + K untuk mencari sistem"
                 >
                     <svg class="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
-                    <span class="hidden md:inline font-mono text-[11px]">Search Systems...</span>
+                    <span class="hidden md:inline font-mono text-[11px]">Cari Sistem Gudang...</span>
                     <kbd class="hidden sm:inline-block px-1.5 py-0.5 rounded bg-black/40 border border-white/15 text-[10px] font-mono text-slate-300 font-bold group-hover:border-cyan-400/50">Ctrl+K</kbd>
                 </button>
 
@@ -194,7 +194,7 @@
                 <button 
                     id="btn-audio-toggle"
                     class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/40 text-slate-300 hover:text-cyan-300 transition-all relative flex items-center gap-1.5 group"
-                    title="Toggle synthesized cyber audio feedback"
+                    title="Aktifkan/Nonaktifkan efek suara audio cyber"
                 >
                     <svg id="audio-toggle-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
@@ -213,7 +213,7 @@
                     <button 
                         id="btn-notifications"
                         class="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/40 text-slate-300 hover:text-amber-300 transition-all relative"
-                        title="Warehouse System Telemetry Alerts"
+                        title="Notifikasi & Telemetri Sistem Gudang"
                     >
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
@@ -225,32 +225,32 @@
                     <div id="notifications-drawer" class="hidden absolute right-0 mt-3 w-80 sm:w-96 glass-panel rounded-2xl p-4 shadow-2xl border border-white/15 z-50 animate-[fadeIn_0.2s_ease-out]">
                         <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
                             <div class="flex items-center gap-2">
-                                <span class="font-orbitron font-bold text-sm text-white">LIVE TELEMETRY</span>
-                                <span class="px-2 py-0.5 text-[10px] rounded-full bg-cyan-500/20 text-cyan-300 font-mono">3 New</span>
+                                <span class="font-orbitron font-bold text-sm text-white">TELEMETRI LANGSUNG</span>
+                                <span class="px-2 py-0.5 text-[10px] rounded-full bg-cyan-500/20 text-cyan-300 font-mono">3 Baru</span>
                             </div>
                             <button id="notifications-close" class="text-slate-400 hover:text-white text-xs font-mono p-1">✕</button>
                         </div>
                         <div class="space-y-2.5 text-xs font-mono">
                             <div class="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/20 hover:border-cyan-500/40 transition-colors cursor-pointer" onclick="window.novaApp.openLaunchModal('mars')">
                                 <div class="flex items-center justify-between text-cyan-300 font-bold mb-1">
-                                    <span>MARS ORDER DISPATCH</span>
-                                    <span class="text-[10px] text-slate-400">2m ago</span>
+                                    <span>PENGIRIMAN PERMINTAAN MARS</span>
+                                    <span class="text-[10px] text-slate-400">2 mnt lalu</span>
                                 </div>
-                                <p class="text-slate-300">Requisition #MR-9042 approved by Supervisor. Routing to Aisle 14.</p>
+                                <p class="text-slate-300">Permintaan #MR-9042 disetujui Supervisor. Mengarah ke Lorong 14.</p>
                             </div>
                             <div class="p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/20 hover:border-amber-500/40 transition-colors cursor-pointer" onclick="window.novaApp.openLaunchModal('saturnus')">
                                 <div class="flex items-center justify-between text-amber-300 font-bold mb-1">
-                                    <span>SATURNUS RFID SCAN</span>
-                                    <span class="text-[10px] text-slate-400">7m ago</span>
+                                    <span>PEMINDAIAN RFID SATURNUS</span>
+                                    <span class="text-[10px] text-slate-400">7 mnt lalu</span>
                                 </div>
-                                <p class="text-slate-300">Dock 04 Inbound portal verified 120 new RFID asset pallets.</p>
+                                <p class="text-slate-300">Portal Masuk Dock 04 memverifikasi 120 palet aset RFID baru.</p>
                             </div>
                             <div class="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/20">
                                 <div class="flex items-center justify-between text-emerald-300 font-bold mb-1">
-                                    <span>NOVA GATEWAY SYNC</span>
-                                    <span class="text-[10px] text-slate-400">14m ago</span>
+                                    <span>SINKRONISASI GATEWAY NOVA</span>
+                                    <span class="text-[10px] text-slate-400">14 mnt lalu</span>
                                 </div>
-                                <p class="text-slate-300">All 2 warehouse applications reporting 99.98% operational uptime.</p>
+                                <p class="text-slate-300">Seluruh 2 aplikasi gudang beroperasi normal dengan uptime 99,98%.</p>
                             </div>
                         </div>
                     </div>
@@ -264,7 +264,7 @@
                 >
                     <span class="text-sm">⚡</span>
                     <span class="hidden sm:inline">SSO</span>
-                    <span>LAUNCH</span>
+                    <span>AKSES</span>
                     <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
@@ -287,19 +287,19 @@
         <!-- Mobile Drawer -->
         <div id="mobile-nav-drawer" class="hidden lg:hidden border-t border-white/10 bg-[#05091b]/95 backdrop-blur-2xl px-4 py-4 space-y-3">
             <div class="flex items-center justify-between text-xs font-mono pb-2 border-b border-white/10">
-                <span class="text-cyan-400 font-bold">NOVA GATEWAY</span>
+                <span class="text-cyan-400 font-bold">GATEWAY NOVA</span>
                 <span class="text-slate-400" id="mobile-live-clock">--:--:-- WIB</span>
             </div>
             <div class="grid grid-cols-2 gap-2 text-xs font-orbitron font-bold">
                 <a href="#hero-solar-system" class="p-3 rounded-xl bg-white/5 border border-white/10 text-cyan-300 text-center hover:bg-cyan-500/10">
-                    🌌 SOLAR ORBIT
+                    🌌 ORBIT SURYA
                 </a>
                 <a href="#system-directory-section" class="p-3 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-center hover:bg-white/10">
-                    📑 DIRECTORY (2)
+                    📑 DIREKTORI (2)
                 </a>
             </div>
             <div class="pt-1">
-                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">QUICK SYSTEM LAUNCH:</span>
+                <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block mb-2">AKSES CEPAT SISTEM:</span>
                 <div class="grid grid-cols-2 gap-2">
                     <button onclick="window.novaApp.directLaunch('mars', event)" class="p-2.5 rounded-xl bg-orange-500/15 border border-orange-500/30 text-orange-300 font-orbitron font-bold text-xs flex items-center justify-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-orange-400"></span>
@@ -326,22 +326,18 @@
             <!-- Enterprise Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono mb-4 tracking-widest uppercase shadow-lg shadow-cyan-500/10">
                 <span class="status-beacon online"></span>
-                <span>CENTRAL WAREHOUSE DIGITAL GATEWAY</span>
+                <span>GATEWAY DIGITAL PUSAT GUDANG</span>
                 <span class="text-slate-500">|</span>
-                <span class="text-slate-300 font-bold">ALL SYSTEMS OPERATIONAL</span>
+                <span class="text-slate-300 font-bold">SEMUA SISTEM BEROPERASI NORMAL</span>
             </div>
 
             <!-- Main Heading -->
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-orbitron tracking-tight text-white mb-4 leading-tight">
-                WELCOME TO <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-cyan-300 to-blue-400 glow-text-cyan">NOVA</span>
+                SELAMAT DATANG DI <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-cyan-300 to-blue-400 glow-text-cyan">NOVA</span>
             </h1>
 
             <p class="text-xl sm:text-2xl font-tech font-semibold text-cyan-200 tracking-wide mb-3">
-                “One Portal, All Warehouse Information”
-            </p>
-
-            <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                Your single command gateway to the Warehouse digital ecosystem. Explore applications orbiting around NOVA Core, or navigate directly to the enterprise directory.
+                “Satu Portal, Untuk Semua Aplikasi Warehouse Consumable”
             </p>
 
             <!-- Action CTAs -->
@@ -350,7 +346,7 @@
                     href="#system-directory-section"
                     class="py-3 px-6 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-orbitron font-extrabold text-xs tracking-wider shadow-lg shadow-cyan-500/30 hover:shadow-cyan-400/50 transition-all duration-300 flex items-center gap-2 btn-shimmer"
                 >
-                    <span>EXPLORE SYSTEMS →</span>
+                    <span>JELAJAHI SISTEM →</span>
                 </a>
                 <button 
                     onclick="window.novaApp.openCommandPalette()"
@@ -360,49 +356,12 @@
                     <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
-                    <span>QUICK FINDER [CTRL+K]</span>
+                    <span>PENCARIAN CEPAT [CTRL+K]</span>
                 </button>
             </div>
         </div>
 
-        <!-- Solar Orbit Control Deck (Top Overlay of Universe Stage) -->
-        <div class="max-w-6xl mx-auto px-4 mb-2 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-            <div class="flex items-center gap-2">
-                <span class="text-slate-400">ORBIT CONTROLS:</span>
-                
-                <!-- Pause/Resume Orbit -->
-                <button 
-                    id="btn-orbit-pause" 
-                    class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 flex items-center gap-1.5 transition-all"
-                >
-                    <svg id="orbit-pause-icon" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span id="orbit-pause-text">PAUSE ORBIT</span>
-                </button>
 
-                <!-- Speed Multipliers -->
-                <div class="hidden sm:flex items-center rounded-lg bg-white/5 border border-white/10 p-0.5">
-                    <button data-orbit-speed="0.5" class="px-2 py-0.5 rounded text-[11px] text-slate-400 hover:text-white transition-colors">0.5x</button>
-                    <button data-orbit-speed="1.0" class="px-2 py-0.5 rounded text-[11px] bg-cyan-500/20 border border-cyan-400 text-cyan-300 transition-colors">1.0x</button>
-                    <button data-orbit-speed="2.0" class="px-2 py-0.5 rounded text-[11px] text-slate-400 hover:text-white transition-colors">2.0x</button>
-                </div>
-            </div>
-
-            <!-- View Angles -->
-            <div class="flex items-center gap-1.5">
-                <span class="text-slate-400 hidden sm:inline">VIEW:</span>
-                <button data-view-angle="3d" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-300 transition-all text-[11px]">
-                    3D PERSPECTIVE
-                </button>
-                <button data-view-angle="solar" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white transition-all text-[11px]">
-                    SOLAR TOP-DOWN
-                </button>
-                <button data-view-angle="iso" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white transition-all text-[11px]">
-                    ISOMETRIC GRID
-                </button>
-            </div>
-        </div>
 
         <!-- 3D SOLAR SYSTEM VIEWPORT -->
         <div class="universe-stage">
@@ -413,7 +372,7 @@
                      ========================================== -->
                 <div 
                     class="nova-sun-container group" 
-                    title="NOVA Central Energy Core"
+                    title="Pusat Energi Gateway NOVA"
                     onclick="window.novaApp.openLaunchModal('mars')"
                 >
                     <div class="nova-core-shield-2"></div>
@@ -445,7 +404,7 @@
                             <!-- Planet Sphere (Directly Clickable) -->
                             <div 
                                 class="planet-body planet-mars cursor-pointer group/marsplanet"
-                                title="Click to Launch MARS"
+                                title="Klik untuk Membuka MARS"
                                 onclick="window.novaApp.directLaunch('mars', event)"
                             >
                                 <span class="text-white text-2xl font-black font-orbitron select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover/marsplanet:scale-125 transition-transform">M</span>
@@ -454,7 +413,7 @@
                             <!-- Planet Label -->
                             <div 
                                 class="planet-badge cursor-pointer"
-                                title="Click to Launch MARS"
+                                title="Klik untuk Membuka MARS"
                                 onclick="window.novaApp.directLaunch('mars', event)"
                             >
                                 🪐 MARS
@@ -470,18 +429,18 @@
                                     <span class="status-beacon online"></span>
                                 </div>
                                 <p class="text-xs text-slate-300 mb-3 leading-relaxed">
-                                    Material Request, Ordering & Requisition Workflow for warehouse consumables.
+                                    Memonitoring ketersediaan stok dan melakukan proses reorder/pemesanan ulang item yang persediaannya sudah berada pada level minimum.
                                 </p>
                                 <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-3">
-                                    <span class="text-emerald-400">● Online (99.98%)</span>
-                                    <span>Ping: 18ms</span>
+                                    <span class="text-emerald-400">● Online (99,98%)</span>
+                                    <span>Latensi: 18ms</span>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <button 
                                         onclick="window.novaApp.directLaunch('mars', event)"
                                         class="py-2 px-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold font-orbitron tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-orange-500/30 btn-shimmer"
                                     >
-                                        <span>LAUNCH</span>
+                                        <span>BUKA SISTEM</span>
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                         </svg>
@@ -490,7 +449,7 @@
                                         onclick="window.novaApp.openLaunchModal('mars')"
                                         class="py-2 px-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 hover:text-white text-[11px] font-mono flex items-center justify-center"
                                     >
-                                        <span>SSO INFO</span>
+                                        <span>DETAIL SSO</span>
                                     </button>
                                 </div>
                             </div>
@@ -513,7 +472,7 @@
                             <!-- Planet Sphere (Directly Clickable to Saturnus!) -->
                             <div 
                                 class="planet-body planet-saturnus cursor-pointer group/saturnplanet"
-                                title="Click to Launch SATURNUS (Direct to Registrasi Consumable)"
+                                title="Klik untuk Membuka SATURNUS (Langsung ke Registrasi Consumable)"
                                 onclick="window.novaApp.directLaunch('saturnus', event)"
                             >
                                 <span class="text-white text-2xl font-black font-orbitron select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover/saturnplanet:scale-125 transition-transform">S</span>
@@ -522,7 +481,7 @@
                             <!-- Planet Label -->
                             <div 
                                 class="planet-badge cursor-pointer"
-                                title="Click to Launch SATURNUS"
+                                title="Klik untuk Membuka SATURNUS"
                                 onclick="window.novaApp.directLaunch('saturnus', event)"
                             >
                                 🪐 SATURNUS
@@ -533,16 +492,16 @@
                                 <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
                                     <div>
                                         <h4 class="font-orbitron font-bold text-base text-amber-300">SATURNUS</h4>
-                                        <span class="text-[10px] text-slate-400 line-clamp-1">Consumable Registration & RFID Utility</span>
+                                        <span class="text-[10px] text-slate-400 line-clamp-1">Registrasi Consumable & Utilitas RFID</span>
                                     </div>
                                     <span class="status-beacon online"></span>
                                 </div>
                                 <p class="text-xs text-slate-300 mb-3 leading-relaxed">
-                                    Registrasi & Unregistrasi Consumable, RFID Tracking & Decommissioning Utility System.
+                                    Sistem Registrasi & Unregistrasi Consumable, Pelacakan RFID & Penonaktifan Aset.
                                 </p>
                                 <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-3">
-                                    <span class="text-emerald-400">● Online (12.4k RFID)</span>
-                                    <span>Ping: 24ms</span>
+                                    <span class="text-emerald-400">● Online (12,4k RFID)</span>
+                                    <span>Latensi: 24ms</span>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <a 
@@ -551,7 +510,7 @@
                                         onclick="event.stopPropagation(); if(window.novaApp?.universe) window.novaApp.universe.playSynthSound(750, 'sine', 0.15, 0.06);"
                                         class="py-2 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 text-slate-950 font-bold font-orbitron text-xs tracking-wider flex items-center justify-center gap-1 shadow-lg shadow-amber-500/30 btn-shimmer hover:brightness-110"
                                     >
-                                        <span>LAUNCH</span>
+                                        <span>BUKA SISTEM</span>
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                         </svg>
@@ -560,7 +519,7 @@
                                         onclick="window.novaApp.openLaunchModal('saturnus')"
                                         class="py-2 px-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 hover:text-white text-[11px] font-mono flex items-center justify-center"
                                     >
-                                        <span>SSO INFO</span>
+                                        <span>DETAIL SSO</span>
                                     </button>
                                 </div>
                             </div>
@@ -573,6 +532,44 @@
             </div>
         </div>
 
+        <!-- Solar Orbit Control Deck (Top Overlay of Universe Stage) -->
+        <div class="max-w-6xl mx-auto px-4 mb-2 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex items-center gap-2">
+                <span class="text-slate-400">KONTROL ORBIT:</span>
+                
+                <!-- Pause/Resume Orbit -->
+                <button 
+                    id="btn-orbit-pause" 
+                    class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 flex items-center gap-1.5 transition-all"
+                >
+                    <svg id="orbit-pause-icon" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span id="orbit-pause-text">JEDA ORBIT</span>
+                </button>
+
+                <!-- Speed Multipliers -->
+                <div class="hidden sm:flex items-center rounded-lg bg-white/5 border border-white/10 p-0.5">
+                    <button data-orbit-speed="0.5" class="px-2 py-0.5 rounded text-[11px] text-slate-400 hover:text-white transition-colors">0.5x</button>
+                    <button data-orbit-speed="1.0" class="px-2 py-0.5 rounded text-[11px] bg-cyan-500/20 border border-cyan-400 text-cyan-300 transition-colors">1.0x</button>
+                    <button data-orbit-speed="2.0" class="px-2 py-0.5 rounded text-[11px] text-slate-400 hover:text-white transition-colors">2.0x</button>
+                </div>
+            </div>
+
+            <!-- View Angles -->
+            <div class="flex items-center gap-1.5">
+                <span class="text-slate-400 hidden sm:inline">SUDUT PANDANG:</span>
+                <button data-view-angle="3d" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-300 transition-all text-[11px]">
+                    PERSPEKTIF 3D
+                </button>
+                <button data-view-angle="solar" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white transition-all text-[11px]">
+                    TAMPILAN ATAS (SOLAR)
+                </button>
+                <button data-view-angle="iso" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white transition-all text-[11px]">
+                    GRID ISOMETRIK
+                </button>
+            </div>
+        </div>
     </section>
 
     <!-- ==========================================================================
@@ -585,13 +582,13 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
                 <div>
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wider mb-2">
-                        <span>SYSTEM MATRIX</span>
+                        <span>MATRIKS SISTEM</span>
                     </div>
                     <h2 class="text-3xl sm:text-4xl font-extrabold font-orbitron text-white">
-                        System Directory
+                        Direktori Sistem Gudang
                     </h2>
                     <p class="text-slate-400 text-sm mt-1">
-                        Explore and launch the 2 core digital applications in the warehouse network.
+                        Jelajahi dan buka 2 aplikasi digital utama dalam jaringan pergudangan.
                     </p>
                 </div>
 
@@ -601,7 +598,7 @@
                         <input 
                             type="text" 
                             id="system-search-input"
-                            placeholder="Filter by name, acronym, module..." 
+                            placeholder="Cari berdasarkan nama, singkatan, modul..." 
                             class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/15 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm text-white placeholder-slate-500 font-mono outline-none transition-all"
                         >
                         <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -614,25 +611,198 @@
             <!-- Filter Tabs Pills -->
             <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 text-xs font-mono no-scrollbar">
                 <button data-sys-filter="all" class="px-4 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/20 transition-all shrink-0">
-                    All Systems (2)
+                    Semua Sistem (2)
                 </button>
                 <button data-sys-filter="favorites" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-white/5 border border-white/10 transition-all shrink-0 flex items-center gap-1.5">
                     <svg class="w-3.5 h-3.5 text-amber-400 fill-amber-400" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
                     </svg>
-                    <span>Pinned / Favorites</span>
+                    <span>Disematkan / Favorit</span>
                 </button>
                 <button data-sys-filter="operations" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-white/5 border border-white/10 transition-all shrink-0">
-                    Material & Request (MARS)
+                    Permintaan & Material (MARS)
                 </button>
                 <button data-sys-filter="assets" class="px-4 py-2 rounded-xl text-slate-300 hover:bg-white/5 border border-white/10 transition-all shrink-0">
-                    Assets & RFID (SATURNUS)
+                    Aset & RFID (SATURNUS)
                 </button>
             </div>
 
             <!-- Dynamic System Cards Grid -->
             <div id="system-directory-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                <!-- Injected dynamically via nova-app.js -->
+                
+                <!-- 1. MARS System Card -->
+                <div 
+                    class="system-directory-card glass-card rounded-2xl p-6 relative flex flex-col justify-between group overflow-hidden border border-white/10 hover:border-cyan-400/40"
+                    data-sys-id="mars"
+                    data-sys-category="operations"
+                    data-sys-url="{{ env('MARS_URL', '/system/mars') }}"
+                    data-search-terms="mars metalart automatic request system material permintaan reorder consumable"
+                >
+                    <!-- Ambient Glow Flare -->
+                    <div class="absolute -right-12 -top-12 w-32 h-32 rounded-full blur-2xl opacity-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-40" style="background-color: #ff6b00;"></div>
+                    
+                    <!-- Card Top Header -->
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl flex items-center justify-center font-orbitron font-bold text-white shadow-lg planet-mars">
+                                    MA
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="sys-name font-orbitron font-bold text-lg text-white group-hover:text-cyan-300 transition-colors">
+                                            MARS
+                                        </h3>
+                                        <span class="sys-badge text-[10px] font-mono font-medium px-2 py-0.5 rounded-full border bg-orange-500/20 text-orange-400 border-orange-500/30">
+                                            Permintaan & Material
+                                        </span>
+                                    </div>
+                                    <span class="sys-fullname text-xs text-slate-400 line-clamp-1">Metalart Automatic Request System</span>
+                                </div>
+                            </div>
+
+                            <!-- Favorite Star Button -->
+                            <button 
+                                onclick="window.novaApp.toggleFavorite('mars', event)" 
+                                class="btn-fav-star p-2 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-white/5 transition-colors"
+                                title="Sematkan ke favorit"
+                            >
+                                <svg class="w-5 h-5 text-amber-400 fill-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Short Description -->
+                        <p class="sys-desc text-sm text-slate-300 leading-relaxed mb-4">
+                            Memonitoring ketersediaan stok dan melakukan proses reorder/pemesanan ulang item yang persediaannya sudah berada pada level minimum.
+                        </p>
+
+                        <!-- Telemetry Grid Pills -->
+                        <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/5 font-mono text-xs mb-4">
+                            <div class="flex items-center gap-1.5 text-slate-300">
+                                <span class="status-beacon online"></span>
+                                <span class="sys-status-label text-[11px]">Beroperasi Normal</span>
+                            </div>
+                            <div class="text-right text-slate-400 text-[11px]">
+                                Latensi: <span class="sys-latency text-cyan-300">18ms</span>
+                            </div>
+                            <div class="text-slate-400 text-[11px]">
+                                Metrik: <span class="sys-stats text-slate-200">1.840 Permintaan Harian</span>
+                            </div>
+                            <div class="text-right text-slate-400 text-[11px]">
+                                Versi: <span class="sys-version text-emerald-400">v3.8.2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Launch Button -->
+                    <div>
+                        <button 
+                            onclick="window.novaApp.directLaunch('mars', event)"
+                            class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold font-orbitron tracking-wider shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 flex items-center justify-center gap-2 btn-shimmer group-hover:scale-[1.02]"
+                        >
+                            <span>AKSES SISTEM</span>
+                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. SATURNUS System Card -->
+                <div 
+                    class="system-directory-card glass-card rounded-2xl p-6 relative flex flex-col justify-between group overflow-hidden border border-white/10 hover:border-cyan-400/40"
+                    data-sys-id="saturnus"
+                    data-sys-category="assets"
+                    data-sys-url="{{ env('SATURNUS_URL', 'http://127.0.0.1:8001') }}"
+                    data-search-terms="saturnus smart asset tracking rfid consumable unregistration registration utilitas"
+                >
+                    <!-- Ambient Glow Flare -->
+                    <div class="absolute -right-12 -top-12 w-32 h-32 rounded-full blur-2xl opacity-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-40" style="background-color: #e09f3e;"></div>
+                    
+                    <!-- Card Top Header -->
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl flex items-center justify-center font-orbitron font-bold text-white shadow-lg planet-saturnus">
+                                    SA
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="sys-name font-orbitron font-bold text-lg text-white group-hover:text-cyan-300 transition-colors">
+                                            SATURNUS
+                                        </h3>
+                                        <span class="sys-badge text-[10px] font-mono font-medium px-2 py-0.5 rounded-full border bg-amber-500/20 text-amber-300 border-amber-500/30">
+                                            Aset & RFID
+                                        </span>
+                                    </div>
+                                    <span class="sys-fullname text-xs text-slate-400 line-clamp-1">Smart Asset Tracking, Unregistration & Registration Network Utility System</span>
+                                </div>
+                            </div>
+
+                            <!-- Favorite Star Button -->
+                            <button 
+                                onclick="window.novaApp.toggleFavorite('saturnus', event)" 
+                                class="btn-fav-star p-2 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-white/5 transition-colors"
+                                title="Sematkan ke favorit"
+                            >
+                                <svg class="w-5 h-5 text-amber-400 fill-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Short Description -->
+                        <p class="sys-desc text-sm text-slate-300 leading-relaxed mb-4">
+                            Registrasi barang consumable, alur persetujuan unregistrasi, pelacakan aset RFID, dan sinkronisasi inventaris gudang secara real-time.
+                        </p>
+
+                        <!-- Telemetry Grid Pills -->
+                        <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/5 font-mono text-xs mb-4">
+                            <div class="flex items-center gap-1.5 text-slate-300">
+                                <span class="status-beacon online"></span>
+                                <span class="sys-status-label text-[11px]">Beroperasi Normal</span>
+                            </div>
+                            <div class="text-right text-slate-400 text-[11px]">
+                                Latensi: <span class="sys-latency text-cyan-300">24ms</span>
+                            </div>
+                            <div class="text-slate-400 text-[11px]">
+                                Metrik: <span class="sys-stats text-slate-200">12.480 Aset Terlacak</span>
+                            </div>
+                            <div class="text-right text-slate-400 text-[11px]">
+                                Versi: <span class="sys-version text-emerald-400">v4.1.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Launch Button -->
+                    <div>
+                        <button 
+                            onclick="window.novaApp.directLaunch('saturnus', event)"
+                            class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 text-slate-950 font-bold font-orbitron text-xs tracking-wider shadow-lg hover:shadow-amber-500/25 transition-all duration-300 flex items-center justify-center gap-2 btn-shimmer group-hover:scale-[1.02]"
+                        >
+                            <span>AKSES SISTEM</span>
+                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empty State (Hidden by default, shown if search has no results) -->
+                <div id="system-empty-state" class="col-span-full py-16 text-center hidden">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold font-orbitron text-white">Sistem Tidak Ditemukan</h3>
+                    <p class="text-slate-400 text-sm mt-1 max-w-md mx-auto">
+                        Tidak ada aplikasi gudang yang cocok dengan "<span class="search-query-text text-cyan-300 font-mono"></span>". Coba cari MARS, SATURNUS, atau WMS.
+                    </p>
+                </div>
+
             </div>
 
         </div>
@@ -660,16 +830,16 @@
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h3 id="launch-modal-title" class="font-orbitron font-black text-2xl text-white">SYSTEM</h3>
+                        <h3 id="launch-modal-title" class="font-orbitron font-black text-2xl text-white">DETAIL SISTEM</h3>
                         <span id="launch-modal-badge" class="text-xs font-mono px-2 py-0.5 rounded-full border">Online</span>
                     </div>
-                    <span id="launch-modal-subtitle" class="text-xs font-mono text-slate-400 block">Full System Name</span>
+                    <span id="launch-modal-subtitle" class="text-xs font-mono text-slate-400 block">Nama Lengkap Sistem</span>
                 </div>
             </div>
 
             <!-- Description -->
             <p id="launch-modal-desc" class="text-sm text-slate-300 leading-relaxed mb-6">
-                System description goes here.
+                Deskripsi sistem akan tampil di sini.
             </p>
 
             <!-- Telemetry Stats Grid -->
@@ -679,7 +849,7 @@
 
             <!-- Target Endpoint URL -->
             <div class="p-3 rounded-xl bg-black/40 border border-white/10 font-mono text-xs text-slate-400 mb-6 flex items-center justify-between">
-                <span class="text-slate-500">SSO TARGET:</span>
+                <span class="text-slate-500">TARGET SSO:</span>
                 <span id="launch-modal-url" class="text-cyan-400 font-bold truncate max-w-[240px]">https://...</span>
             </div>
 
@@ -688,7 +858,7 @@
                 id="launch-modal-btn"
                 class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-600 text-slate-950 hover:text-white font-orbitron font-extrabold text-sm tracking-wider shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-300 flex items-center justify-center gap-2 btn-shimmer"
             >
-                <span>LAUNCH PORTAL INSTANCE</span>
+                <span>BUKA APLIKASI SEKARANG</span>
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                 </svg>
@@ -709,7 +879,7 @@
                 <input 
                     type="text" 
                     id="cmd-palette-input" 
-                    placeholder="Type a warehouse system (e.g. MARS, SATURNUS)..." 
+                    placeholder="Ketik nama sistem gudang (contoh: MARS, SATURNUS)..." 
                     class="w-full bg-transparent text-white font-mono text-sm outline-none placeholder-slate-500"
                 >
                 <kbd class="px-2 py-0.5 rounded bg-black/40 border border-white/10 text-[10px] font-mono text-slate-400">ESC</kbd>
@@ -720,8 +890,8 @@
             </div>
 
             <div class="p-3 bg-black/30 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                <span>Select with mouse or click system to launch</span>
-                <span>NOVA Enterprise Gateway</span>
+                <span>Pilih dengan kursor atau klik sistem untuk membuka</span>
+                <span>Gateway Enterprise NOVA</span>
             </div>
         </div>
     </div>
@@ -747,29 +917,29 @@
                         </span>
                     </div>
                     <p class="text-xs font-mono text-cyan-400 tracking-wider">
-                        Network Of Warehouse Access — One Portal, All Warehouse Information
+                        Network Of Warehouse Access — Satu Portal, Semua Informasi Gudang
                     </p>
                     <p class="text-xs text-slate-400 max-w-md leading-relaxed">
-                        Central enterprise command gateway connecting material requisition, asset lifecycle telemetry, and warehouse operations.
+                        Gerbang komando enterprise terpusat yang menghubungkan rekuisisi material, telemetri siklus hidup aset, dan operasional pergudangan.
                     </p>
                 </div>
 
                 <!-- Col 2: Core Applications -->
                 <div class="space-y-2 font-mono text-xs">
-                    <span class="font-orbitron font-bold text-white text-sm block mb-3">SYSTEM NODES</span>
-                    <div><a href="#system-directory-section" class="text-slate-400 hover:text-cyan-300 transition-colors">MARS (Material Request)</a></div>
-                    <div><a href="#system-directory-section" class="text-slate-400 hover:text-amber-300 transition-colors">SATURNUS (Asset Tracking)</a></div>
+                    <span class="font-orbitron font-bold text-white text-sm block mb-3">SIMPUL SISTEM</span>
+                    <div><a href="#system-directory-section" class="text-slate-400 hover:text-cyan-300 transition-colors">MARS (Permintaan Material)</a></div>
+                    <div><a href="#system-directory-section" class="text-slate-400 hover:text-amber-300 transition-colors">SATURNUS (Pelacakan Aset & RFID)</a></div>
                 </div>
 
                 <!-- Col 3: Operations & Support -->
                 <div class="space-y-2 font-mono text-xs">
-                    <span class="font-orbitron font-bold text-white text-sm block mb-3">COMMAND CENTER</span>
-                    <div><a href="#hero-solar-system" class="text-slate-400 hover:text-cyan-300 transition-colors">Solar Orbit Universe</a></div>
-                    <div><a href="#system-directory-section" class="text-slate-400 hover:text-white transition-colors">System Directory Matrix</a></div>
-                    <div><a href="javascript:void(0)" onclick="window.novaApp.openCommandPalette()" class="text-slate-400 hover:text-white transition-colors">Quick Command Palette [Ctrl+K]</a></div>
+                    <span class="font-orbitron font-bold text-white text-sm block mb-3">PUSAT KENDALI</span>
+                    <div><a href="#hero-solar-system" class="text-slate-400 hover:text-cyan-300 transition-colors">Alam Semesta Orbit Surya</a></div>
+                    <div><a href="#system-directory-section" class="text-slate-400 hover:text-white transition-colors">Matriks Direktori Sistem</a></div>
+                    <div><a href="javascript:void(0)" onclick="window.novaApp.openCommandPalette()" class="text-slate-400 hover:text-white transition-colors">Pencarian Cepat Perintah [Ctrl+K]</a></div>
                     <div class="pt-2">
                         <button id="btn-replay-intro" class="px-3 py-1 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 transition-all text-[11px]">
-                            ↺ Replay Boot Animation
+                            ↺ Putar Ulang Animasi Boot
                         </button>
                     </div>
                 </div>
@@ -779,14 +949,14 @@
             <!-- Footer Bottom -->
             <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-500">
                 <div>
-                    &copy; 2026 NOVA Warehouse Universe. Network Of Warehouse Access. All systems secured.
+                    &copy; 2026 NOVA Warehouse Universe. Network Of Warehouse Access. Seluruh sistem terproteksi.
                 </div>
                 <div class="flex items-center gap-4">
                     <span class="flex items-center gap-1 text-emerald-400">
                         <span class="status-beacon online"></span>
-                        CORE STABLE (99.98%)
+                        CORE STABIL (99,98%)
                     </span>
-                    <span>NODE ID: WH-01-CENTRAL</span>
+                    <span>ID SIMPUL: WH-01-CENTRAL</span>
                 </div>
             </div>
 
